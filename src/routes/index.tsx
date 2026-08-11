@@ -115,10 +115,10 @@ function Header() {
 /* セクション共通パーツ                                                */
 /* ------------------------------------------------------------------ */
 
-function SectionHeading({ label, lead }: { label: string; lead?: string }) {
+function SectionHeading({ id, label, lead }: { id: string; label: string; lead?: string }) {
   return (
     <FadeIn className="mb-14 md:mb-20">
-      <h2 className="font-display text-3xl font-bold tracking-[0.16em] md:text-4xl">{label}</h2>
+      <h2 id={id} className="font-display text-3xl font-bold tracking-[0.16em] md:text-4xl">{label}</h2>
       <span className="mt-5 block h-px w-12 bg-accent" aria-hidden="true" />
       {lead && <p className="mt-6 max-w-2xl text-sm leading-8 text-muted-foreground">{lead}</p>}
     </FadeIn>
@@ -185,7 +185,7 @@ function HomePage() {
         {/* ABOUT */}
         <section id="about" aria-labelledby="about-title" className="px-6 py-24 md:py-32 lg:px-8">
           <div className="mx-auto max-w-6xl">
-            <SectionHeading label="ABOUT" />
+            <SectionHeading id="about-title" label="ABOUT" />
             <div className="grid gap-12 md:grid-cols-[280px_minmax(0,1fr)] md:gap-16">
               {/* 顔写真スペース：src/assets に画像を追加して <img> に差し替えできます */}
               <FadeIn>
@@ -216,7 +216,7 @@ function HomePage() {
         {/* SKILLS */}
         <section id="skills" aria-labelledby="skills-title" className="bg-surface px-6 py-24 md:py-32 lg:px-8">
           <div className="mx-auto max-w-6xl">
-            <SectionHeading label="SKILLS" lead="制作で使用している技術です。" />
+            <SectionHeading id="skills-title" label="SKILLS" lead="制作で使用している技術です。" />
             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {skills.map((skill, i) => (
                 <FadeIn as="li" key={skill.title} delay={i * 80}>
@@ -233,7 +233,7 @@ function HomePage() {
         {/* SERVICE */}
         <section id="service" aria-labelledby="service-title" className="px-6 py-24 md:py-32 lg:px-8">
           <div className="mx-auto max-w-6xl">
-            <SectionHeading label="SERVICE" lead="ご対応できる制作内容です。" />
+            <SectionHeading id="service-title" label="SERVICE" lead="ご対応できる制作内容です。" />
             <ul className="grid gap-6 md:grid-cols-2">
               {services.map((service, i) => (
                 <FadeIn as="li" key={service.title} delay={i * 80}>
@@ -252,6 +252,7 @@ function HomePage() {
         <section id="works" aria-labelledby="works-title" className="bg-surface px-6 py-24 md:py-32 lg:px-8">
           <div className="mx-auto max-w-6xl">
             <SectionHeading
+              id="works-title"
               label="WORKS"
               lead="掲載しているものは、制作スキルをご確認いただくための自主制作サンプルです。"
             />
@@ -303,6 +304,7 @@ function HomePage() {
         <section id="flow" aria-labelledby="flow-title" className="px-6 py-24 md:py-32 lg:px-8">
           <div className="mx-auto max-w-6xl">
             <SectionHeading
+              id="flow-title"
               label="FLOW"
               lead="お問い合わせから納品までの流れです。はじめての方にも分かるようにご案内します。"
             />
