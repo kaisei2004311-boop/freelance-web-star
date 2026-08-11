@@ -183,7 +183,8 @@ function SectionHeading({
 /* ------------------------------------------------------------------ */
 
 function HomePage() {
-  const [featured, ...restWorks] = works;
+  const featured = works[0]!;
+  const restWorks = works.slice(1);
 
   return (
     <div id="top" className="min-h-dvh bg-background text-foreground">
