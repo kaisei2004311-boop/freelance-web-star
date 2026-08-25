@@ -3,21 +3,25 @@ import { useState } from "react";
 
 import { FadeIn } from "@/components/FadeIn";
 import { flow, navItems, profile, services, skills, works } from "@/data/site";
+import profilePhoto from "@/assets/profile.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Web制作ポートフォリオ｜Webサイト制作・コーディング" },
+      { title: "中嶋 海晴｜Web制作ポートフォリオ（HTML / CSS / JavaScript）" },
       {
         name: "description",
         content:
-          "Webサイト制作・LP制作・レスポンシブ対応・既存サイト修正を承ります。HTML / CSS / JavaScriptを中心に、見やすく使いやすいサイトを制作します。",
+          "HTML / CSS / JavaScriptを中心に、Webサイト制作・LP制作・レスポンシブ対応・既存サイトの修正に対応しています。見やすく使いやすいサイトづくりを大切にしています。",
       },
-      { property: "og:title", content: "Web制作ポートフォリオ｜Webサイト制作・コーディング" },
+      {
+        property: "og:title",
+        content: "中嶋 海晴｜Web制作ポートフォリオ（HTML / CSS / JavaScript）",
+      },
       {
         property: "og:description",
         content:
-          "Webサイト制作・LP制作・レスポンシブ対応・既存サイト修正を承ります。制作の流れとサンプル実績を掲載しています。",
+          "HTML / CSS / JavaScriptを中心に、Webサイト制作・LP制作・レスポンシブ対応・既存サイトの修正に対応しています。制作の流れと自主制作作品を掲載しています。",
       },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
@@ -30,11 +34,11 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          name: "Web制作ポートフォリオ",
+          name: "中嶋 海晴｜Web制作ポートフォリオ",
           description:
             "HTML / CSS / JavaScriptによるWebサイト制作・LP制作・レスポンシブ対応・既存サイト修正。",
           areaServed: "JP",
-          serviceType: ["LP制作", "Webサイト制作", "レスポンシブ対応", "Webサイト修正"],
+          serviceType: ["LP制作", "Webサイト制作", "レスポンシブ対応", "既存サイト修正"],
         }),
       },
     ],
@@ -183,9 +187,6 @@ function SectionHeading({
 /* ------------------------------------------------------------------ */
 
 function HomePage() {
-  const featured = works[0]!;
-  const restWorks = works.slice(1);
-
   return (
     <div id="top" className="min-h-dvh bg-background text-foreground">
       <Header />
@@ -223,24 +224,24 @@ function HomePage() {
                   id="hero-title"
                   className="mt-9 font-display text-[2.25rem] leading-[1.45] font-bold tracking-[-0.01em] sm:text-[3.25rem] sm:leading-[1.4] lg:text-[4rem] lg:leading-[1.35]"
                 >
-                  <span className="block">Webサイト制作で、</span>
+                  <span className="block">見やすく、使いやすいWebサイトを、</span>
                   <span className="mt-1 block">
-                    あなたの
                     <span className="relative inline-block">
-                      想い
+                      丁寧
                       <span
                         aria-hidden="true"
                         className="absolute inset-x-0 -bottom-1 h-[0.35em] -z-10 bg-accent/15"
                       />
                     </span>
-                    をカタチに。
+                    に作ります。
                   </span>
                 </h1>
               </FadeIn>
 
               <FadeIn delay={240}>
                 <p className="mt-9 max-w-xl text-sm leading-8 text-muted-foreground">
-                  HTML / CSS / JavaScriptを使い、見やすく・使いやすく・崩れないWebサイトを制作します。
+                  HTML / CSS /
+                  JavaScriptを中心に、LP制作・レスポンシブ対応・既存サイトの修正など、Web制作のご相談に対応しています。
                 </p>
               </FadeIn>
 
@@ -250,7 +251,7 @@ function HomePage() {
                     href="#works"
                     className="group inline-flex h-14 items-center justify-center gap-3 rounded-full bg-primary px-10 text-sm tracking-[0.15em] text-primary-foreground transition-all duration-500 hover:-translate-y-0.5 hover:bg-accent hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.45)]"
                   >
-                    制作実績を見る
+                    作品を見る
                     <span aria-hidden="true" className="transition-transform duration-500 group-hover:translate-x-1">
                       →
                     </span>
@@ -267,7 +268,7 @@ function HomePage() {
 
             <FadeIn delay={480} className="lg:pb-2">
               <ul className="space-y-4 border-t border-border pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-                {["Web Design", "Coding", "Responsive"].map((item) => (
+                {["HTML / CSS / JS", "Responsive", "既存サイト修正"].map((item) => (
                   <li
                     key={item}
                     className="flex items-center gap-3 font-display text-[0.7rem] tracking-[0.28em] text-muted-foreground"
@@ -295,41 +296,45 @@ function HomePage() {
               id="about-title"
               index="01"
               label="ABOUT"
-              title="丁寧なやりとりと、崩れない実装を。"
+              title="丁寧なやりとりと、分かりやすい実装を。"
             />
             <div className="grid gap-12 md:grid-cols-[300px_minmax(0,1fr)] md:gap-20">
-              {/* 顔写真スペース：src/assets に画像を追加して <img> に差し替えできます */}
               <FadeIn>
-                <div className="relative max-w-[300px]">
+                <div className="relative mx-auto w-full max-w-[300px]">
                   <span
                     aria-hidden="true"
                     className="absolute -top-3 -left-3 h-full w-full border border-accent/30"
                   />
-                  <div className="relative flex aspect-[4/5] w-full items-center justify-center bg-surface">
-                    <span className="text-[0.7rem] tracking-[0.28em] text-muted-foreground">PHOTO</span>
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface">
+                    <img
+                      src={profilePhoto}
+                      alt="中嶋 海晴のプロフィール画像"
+                      width={600}
+                      height={750}
+                      className="h-full w-full object-cover object-[center_20%]"
+                    />
                   </div>
                 </div>
               </FadeIn>
               <FadeIn delay={120}>
                 <h3 className="font-display text-xl leading-[1.7] font-bold md:text-2xl">
-                  Web制作・フロントエンド開発を行っています。
+                  HTML / CSS / JavaScriptを中心に、Web制作をしています。
                 </h3>
                 <div className="mt-8 space-y-6 text-[0.9rem] leading-9 text-muted-foreground">
                   <p>
                     HTML / CSS /
-                    JavaScriptを中心に、ユーザーにとって見やすく使いやすいWebサイト制作を心がけています。
+                    JavaScriptを中心に、見やすく使いやすいWebサイトづくりを心がけています。
                   </p>
                   <p>
-                    お客様のご要望を丁寧にヒアリングし、最後まで責任を持って対応いたします。
-                    分かりにくい専門用語は使わず、進め方をひとつずつご説明しますので、
-                    はじめてWebサイトを依頼される方も安心してご相談ください。
+                    ご希望や現状のサイトの困りごとを丁寧に伺いながら、進め方をひとつずつご説明します。
+                    専門用語はできるだけかみくだいてお伝えするので、はじめての方も気軽にご相談ください。
                   </p>
                 </div>
                 <dl className="mt-10 grid gap-6 border-t border-border pt-8 sm:grid-cols-3">
                   {[
                     { term: "NAME", desc: profile.name },
                     { term: "ROLE", desc: profile.role },
-                    { term: "AREA", desc: "オンライン対応（全国）" },
+                    { term: "AREA", desc: "オンライン対応（リモート）" },
                   ].map((item) => (
                     <div key={item.term}>
                       <dt className="font-display text-[0.65rem] tracking-[0.28em] text-muted-foreground">
@@ -410,80 +415,28 @@ function HomePage() {
         <section
           id="works"
           aria-labelledby="works-title"
-          className="bg-surface px-6 py-24 md:py-36 lg:px-8"
+          className="bg-surface px-6 py-24 md:py-32 lg:px-8"
         >
           <div className="mx-auto max-w-6xl">
             <SectionHeading
               id="works-title"
               index="04"
               label="WORKS"
-              title="制作実績"
-              lead="掲載しているものは、制作スキルをご確認いただくための自主制作サンプルです。"
+              title="制作作品"
+              lead="掲載しているものは、スキルをご確認いただくための自主制作サイトです。"
             />
 
-            {/* 1件目は大きく見せる */}
-            <FadeIn>
-              <article className="group grid gap-8 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] md:items-center md:gap-14">
-                <a
-                  href={featured.url ?? "#works"}
-                  className="relative block overflow-hidden bg-muted"
-                  aria-label={`${featured.title}を見る`}
-                >
-                  <img
-                    src={featured.image}
-                    alt={`${featured.title}のサイトイメージ`}
-                    width={1280}
-                    height={860}
-                    className="aspect-[3/2] w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-primary/0 transition-colors duration-700 group-hover:bg-primary/15"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute bottom-6 left-6 inline-flex h-11 items-center rounded-full bg-background px-6 font-display text-[0.65rem] tracking-[0.28em] opacity-0 transition-all duration-500 group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0"
-                  >
-                    VIEW
-                  </span>
-                </a>
-                <div>
-                  <span className="font-display text-[0.65rem] tracking-[0.28em] text-accent">FEATURED</span>
-                  <h3 className="mt-4 font-display text-2xl leading-[1.6] font-bold">{featured.title}</h3>
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {featured.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="border border-border px-3 py-1 text-[0.7rem] tracking-wider text-muted-foreground"
-                      >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-6 text-[0.9rem] leading-8 text-muted-foreground">
-                    {featured.description}
-                  </p>
-                  <a
-                    href={featured.url ?? "#works"}
-                    className="link-underline mt-8 inline-flex items-center gap-2 text-xs tracking-[0.2em]"
-                  >
-                    詳しく見る
-                    <span aria-hidden="true" className="transition-transform duration-500 group-hover:translate-x-1">
-                      →
-                    </span>
-                  </a>
-                </div>
-              </article>
-            </FadeIn>
-
-            <ul className="mt-16 grid gap-x-10 gap-y-16 md:mt-24 md:grid-cols-2">
-              {restWorks.map((work, i) => (
-                <FadeIn as="li" key={work.id} delay={(i % 2) * 100} className={i % 2 === 1 ? "md:mt-16" : ""}>
-                  <article className="group">
+            <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-14">
+              {works.map((work, i) => (
+                <FadeIn as="li" key={work.id} delay={(i % 2) * 80} className="h-full">
+                  <article className="group flex h-full flex-col">
                     <a
                       href={work.url ?? "#works"}
                       className="relative block overflow-hidden bg-muted"
                       aria-label={`${work.title}を見る`}
+                      {...(work.url
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                     >
                       <img
                         src={work.image}
@@ -491,7 +444,7 @@ function HomePage() {
                         width={1024}
                         height={768}
                         loading="lazy"
-                        className="aspect-[4/3] w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                        className="aspect-[4/3] h-auto w-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                       />
                       <span
                         aria-hidden="true"
@@ -504,12 +457,12 @@ function HomePage() {
                         VIEW
                       </span>
                     </a>
-                    <div className="mt-6">
+                    <div className="mt-6 flex flex-1 flex-col">
                       <span className="font-display text-[0.65rem] tracking-[0.28em] text-muted-foreground">
-                        0{i + 2}
+                        0{i + 1}
                       </span>
                       <h3 className="mt-3 font-display text-lg leading-[1.6] font-bold">{work.title}</h3>
-                      <ul className="mt-4 flex flex-wrap gap-2">
+                      <ul className="mt-4 flex min-h-[2rem] flex-wrap gap-2">
                         {work.tags.map((tag) => (
                           <li
                             key={tag}
@@ -522,7 +475,10 @@ function HomePage() {
                       <p className="mt-4 text-[0.9rem] leading-8 text-muted-foreground">{work.description}</p>
                       <a
                         href={work.url ?? "#works"}
-                        className="link-underline mt-6 inline-flex items-center gap-2 text-xs tracking-[0.2em]"
+                        className="link-underline mt-auto inline-flex items-center gap-2 pt-6 text-xs tracking-[0.2em]"
+                        {...(work.url
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
                       >
                         詳しく見る
                         <span
@@ -548,7 +504,7 @@ function HomePage() {
               index="05"
               label="FLOW"
               title="制作の流れ"
-              lead="お問い合わせから納品までの流れです。はじめての方にも分かるようにご案内します。"
+              lead="お問い合わせから納品までの流れです。進め方をあらかじめご案内します。"
             />
             <ol className="border-t border-border">
               {flow.map((item, i) => (
@@ -587,13 +543,13 @@ function HomePage() {
                 id="contact-title"
                 className="mt-7 font-display text-[1.6rem] leading-[1.6] font-bold md:text-[2.25rem] md:leading-[1.5]"
               >
-                Webサイト制作・修正の
+                Web制作の
                 <br className="sm:hidden" />
                 ご相談はこちら
               </h2>
               <p className="mt-7 text-[0.9rem] leading-8 text-primary-foreground/70">
-                「何から相談すればいいか分からない」という段階でも大丈夫です。
-                ご希望をお伺いしたうえで、内容とお見積りをご案内します。
+                「どこを直せばいいか分からない」「まずは話を聞いてほしい」という段階でも大丈夫です。
+                内容を伺ったうえで、できることと目安のお見積りをお伝えします。
               </p>
               <a
                 href={`mailto:${profile.email}`}

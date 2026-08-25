@@ -7,6 +7,8 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
+    // GitHub Pages のサブパス公開用（vite / tanstackStart の basepath と一致）
+    basepath: "/freelance-web-star",
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,

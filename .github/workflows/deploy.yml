@@ -1,0 +1,75 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Prepare GitHub Pages files
+        run: |
+          set -euo pipefail
+          PUBLISH_DIR="dist/client"
+          if [ ! -d "$PUBLISH_DIR" ]; then
+            echo "Expected build output at $PUBLISH_DIR"
+            ls -la dist || true
+            exit 1
+          fi
+
+          # SPA シェルを index / 404 として複製（GitHub Pages 直アクセス用）
+          if [ -f "$PUBLISH_DIR/_shell.html" ]; then
+            cp "$PUBLISH_DIR/_shell.html" "$PUBLISH_DIR/index.html"
+            cp "$PUBLISH_DIR/_shell.html" "$PUBLISH_DIR/404.html"
+          elif [ -f "$PUBLISH_DIR/index.html" ]; then
+            cp "$PUBLISH_DIR/index.html" "$PUBLISH_DIR/404.html"
+          else
+            echo "Neither _shell.html nor index.html found in $PUBLISH_DIR"
+            ls -la "$PUBLISH_DIR"
+            exit 1
+          fi
+
+          mkdir -p _site
+          cp -R "$PUBLISH_DIR"/. _site/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

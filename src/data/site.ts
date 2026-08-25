@@ -2,58 +2,54 @@
  * サイト内のテキスト・制作実績データをまとめたファイル。
  * ここを編集するだけで、実績や文言を差し替えられます。
  */
-import work01 from "@/assets/work-01.jpg";
-import work02 from "@/assets/work-02.jpg";
-import work03 from "@/assets/work-03.jpg";
-import work04 from "@/assets/work-04.jpg";
-import work05 from "@/assets/work-05.jpg";
-import work06 from "@/assets/work-06.jpg";
+import shopSite from "@/assets/shop-site.png";
+import flowerSite from "@/assets/flower-site.png";
+import dayserviceSite from "@/assets/dayservice-site.png";
+import wataribuneSite from "@/assets/wataribune-site.png";
 
 export const profile = {
-  name: "Your Name",
-  role: "Web Design / Coding",
-  email: "your-email@example.com",
+  name: "中嶋 海晴（KAISEI NAKAJIMA）",
+  role: "Web制作（HTML / CSS / JavaScript）",
+  email: "kaisei2004311@gmail.com",
 };
 
 export const skills = [
   {
     title: "HTML",
-    description: "意味の伝わるマークアップを意識し、SEO・アクセシビリティに配慮した構造で記述します。",
+    description: "見出しや文章の構造が伝わりやすいよう、整理されたマークアップを心がけています。",
   },
   {
     title: "CSS",
-    description: "FlexboxやGridを用いて、デザインに忠実で崩れにくいレイアウトを組み立てます。",
+    description: "FlexboxやGridを使い、意図したレイアウトが崩れにくいスタイルを組み立てます。",
   },
   {
     title: "JavaScript",
-    description: "スライダーやアコーディオンなど、必要な動きをシンプルな実装で追加します。",
+    description: "スライダーやアコーディオンなど、必要な動きをシンプルに実装します。",
   },
   {
     title: "Responsive Design",
     description: "PC・タブレット・スマートフォンそれぞれで見やすい表示になるよう調整します。",
-  },
-  {
-    title: "Git / GitHub",
-    description: "バージョン管理を行い、変更履歴を残しながら安全に制作を進めます。",
   },
 ];
 
 export const services = [
   {
     title: "LP制作",
-    description: "デザインをもとにランディングページをコーディングします。",
+    description:
+      "広告やキャンペーン用の1ページサイトを、デザインをもとにHTML / CSS / JavaScriptで実装します。",
   },
   {
     title: "Webサイト制作",
-    description: "企業サイト・店舗サイト・個人サイトなどのWebサイト制作に対応します。",
+    description: "店舗・個人・小規模な紹介サイトなど、数ページ程度のサイト制作に対応します。",
   },
   {
     title: "レスポンシブ対応",
-    description: "PC・タブレット・スマートフォンで最適に表示されるサイトを制作します。",
+    description: "スマホ表示の崩れや見づらさを整え、各画面幅で使いやすい表示に調整します。",
   },
   {
-    title: "Webサイト修正",
-    description: "HTML / CSS / JavaScriptを使用した既存サイトの修正・調整に対応します。",
+    title: "既存サイト修正",
+    description:
+      "文言・画像の差し替え、レイアウト調整、ちょっとした動きの追加など、既存サイトの修正に対応します。",
   },
 ];
 
@@ -66,49 +62,43 @@ export type Work = {
   url?: string;
 };
 
-/** 制作実績（すべて自主制作のサンプルです。画像とテキストを差し替えてご利用ください） */
+/** 制作作品（すべて自主制作・練習作品です） */
 export const works: Work[] = [
   {
-    id: "work-01",
-    title: "コーポレートサイト（自主制作）",
-    image: work01,
-    tags: ["HTML", "CSS", "JavaScript"],
-    description: "企業サイトを想定し、会社情報・事業内容・問い合わせまでを1サイトにまとめました。",
+    id: "shop-site",
+    title: "ショップサイト",
+    image: shopSite,
+    tags: ["HTML", "CSS", "JavaScript", "Responsive"],
+    description:
+      "架空のショップを想定して制作した自主制作・練習作品です。商品一覧やカート操作など、買い物の流れが分かりやすい構成にしています。",
+    url: "https://kaisei2004311-boop.github.io/shop-site/",
   },
   {
-    id: "work-02",
-    title: "カフェサイト（自主制作）",
-    image: work02,
+    id: "flower-site",
+    title: "花屋サイト",
+    image: flowerSite,
+    tags: ["HTML", "CSS", "JavaScript", "Responsive"],
+    description:
+      "架空の花屋を想定して制作した自主制作・練習作品です。コレクション紹介からお問い合わせまでを、上品なトーンで1ページにまとめています。",
+    url: "https://kaisei2004311-boop.github.io/flower-site/",
+  },
+  {
+    id: "dayservice-site",
+    title: "デイサービスサイト",
+    image: dayserviceSite,
     tags: ["HTML", "CSS", "Responsive"],
-    description: "店舗の雰囲気が伝わるよう、写真を大きく使ったレイアウトで構成しました。",
+    description:
+      "架空のデイサービス施設を想定して制作した自主制作・練習作品です。サービス内容や1日の流れ、アクセス情報を分かりやすく整理しています。",
+    url: "https://kaisei2004311-boop.github.io/dayservice-site/",
   },
   {
-    id: "work-03",
-    title: "フィットネスLP（自主制作）",
-    image: work03,
-    tags: ["HTML", "CSS", "JavaScript"],
-    description: "申し込みまで迷わず進めるよう、情報の順序とボタン配置を整理したLPです。",
-  },
-  {
-    id: "work-04",
-    title: "レスポンシブ実装サンプル",
-    image: work04,
-    tags: ["CSS Grid", "Flexbox", "Responsive"],
-    description: "同じデザインをPC・タブレット・スマートフォンで最適に表示する実装サンプルです。",
-  },
-  {
-    id: "work-05",
-    title: "ポートフォリオサイト（自主制作）",
-    image: work05,
-    tags: ["HTML", "CSS", "JavaScript"],
-    description: "作品を見せることを目的に、余白と写真のバランスを重視して制作しました。",
-  },
-  {
-    id: "work-06",
-    title: "サロンサイト（自主制作）",
-    image: work06,
-    tags: ["HTML", "CSS", "Responsive"],
-    description: "メニューやアクセス情報を探しやすく整理した、店舗向けサイトのサンプルです。",
+    id: "wataribune-site",
+    title: "渡船サイト",
+    image: wataribuneSite,
+    tags: ["HTML", "CSS", "JavaScript", "Responsive"],
+    description:
+      "架空の渡船・釣り船サービスを想定して制作した自主制作・練習作品です。出船情報・料金・予約案内を見やすくまとめています。",
+    url: "https://kaisei2004311-boop.github.io/wataribune-site/",
   },
 ];
 
@@ -116,20 +106,18 @@ export const flow = [
   {
     step: "01",
     title: "お問い合わせ",
-    description:
-      "フォームまたは各サービスのメッセージ機能からご連絡ください。ご相談の段階でも問題ありません。",
+    description: "メールにてご連絡ください。ご相談の段階でも問題ありません。",
   },
   {
     step: "02",
     title: "ヒアリング",
     description:
-      "サイトの目的・ご希望のイメージ・ページ数・ご予算・納期をお伺いし、内容とお見積りをご提示します。",
+      "サイトの目的・ご希望のイメージ・ページ数・ご予算・納期をお伺いし、内容の整理と目安のお見積りをお伝えします。",
   },
   {
     step: "03",
     title: "制作",
-    description:
-      "内容にご同意いただいた後、コーディングを開始します。進捗は途中でもご報告いたします。",
+    description: "内容にご同意いただいた後、コーディングを開始します。進捗は途中でもご報告します。",
   },
   {
     step: "04",
@@ -141,7 +129,7 @@ export const flow = [
     step: "05",
     title: "納品",
     description:
-      "データのお渡し、またはサーバーへのアップロードを行って納品完了です。納品後のご質問にも対応します。",
+      "データのお渡し、またはサーバーへのアップロードを行って納品完了です。納品後の簡単なご質問にもお答えします。",
   },
 ];
 
