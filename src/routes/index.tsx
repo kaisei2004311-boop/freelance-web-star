@@ -1,9 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FadeIn } from "@/components/FadeIn";
 import { flow, navItems, profile, services, skills, works } from "@/data/site";
 import profilePhoto from "@/assets/profile.jpeg";
+import creativeWorkspace from "@/assets/creative-workspace.webp";
+
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const distance = document.documentElement.scrollHeight - window.innerHeight;
+        setProgress(distance > 0 ? (window.scrollY / distance) * 100 : 0);
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return <div aria-hidden="true" className="scroll-progress" style={{ width: `${progress}%` }} />;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,6 +81,7 @@ function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
+      <ScrollProgress />
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 py-4 lg:px-8">
         <a
           href="#top"
@@ -187,6 +214,7 @@ function SectionHeading({
 /* ------------------------------------------------------------------ */
 
 function HomePage() {
+  const featuredWork = works[1]!;
   return (
     <div id="top" className="min-h-dvh bg-background text-foreground">
       <Header />
@@ -195,7 +223,7 @@ function HomePage() {
         {/* HERO */}
         <section
           aria-labelledby="hero-title"
-          className="relative flex min-h-dvh items-center overflow-hidden px-6 pt-32 pb-20 lg:px-8"
+          className="hero-stage relative flex min-h-dvh items-center overflow-hidden px-6 pt-32 pb-20 lg:px-8"
         >
           <div
             aria-hidden="true"
@@ -210,7 +238,7 @@ function HomePage() {
             className="pointer-events-none absolute -top-32 -right-32 hidden h-[34rem] w-[34rem] rounded-full border border-border/70 md:block"
           />
 
-          <div className="relative mx-auto grid w-full max-w-6xl gap-16 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
+          <div className="relative mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.85fr)] lg:items-center lg:gap-8 xl:gap-16">
             <div>
               <FadeIn>
                 <p className="flex items-center gap-4 font-display text-[0.7rem] tracking-[0.32em] text-muted-foreground">
@@ -222,7 +250,7 @@ function HomePage() {
               <FadeIn delay={120}>
                 <h1
                   id="hero-title"
-                  className="mt-9 font-display text-[2.25rem] leading-[1.45] font-bold tracking-[-0.01em] sm:text-[3.25rem] sm:leading-[1.4] lg:text-[4rem] lg:leading-[1.35]"
+                  className="mt-9 font-display text-[2.25rem] leading-[1.45] font-bold tracking-[-0.01em] sm:text-[3.25rem] sm:leading-[1.4] lg:text-[3.15rem] lg:leading-[1.4] xl:text-[3.55rem]"
                 >
                   <span className="block">見やすく、使いやすいWebサイトを、</span>
                   <span className="mt-1 block">
@@ -266,12 +294,41 @@ function HomePage() {
               </FadeIn>
             </div>
 
-            <FadeIn delay={480} className="lg:pb-2">
-              <ul className="space-y-4 border-t border-border pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+            <FadeIn delay={480} className="hero-visual relative mx-auto w-full max-w-[480px] lg:mx-0 lg:ml-auto lg:pt-4">
+              <div className="hero-visual-frame relative ml-auto w-[82%] overflow-hidden rounded-t-[140px] rounded-b-[12px] bg-surface shadow-[0_30px_80px_-35px_rgba(20,30,50,0.28)]">
+                <img
+                  src={creativeWorkspace}
+                  alt="デザインを検討するワークスペースのイメージ"
+                  width={960}
+                  height={1200}
+                  fetchPriority="high"
+                  className="aspect-[4/5] w-full object-cover"
+                />
+              </div>
+              <a
+                href={featuredWork.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-project-card group absolute -bottom-5 left-0 w-[58%] bg-background p-2.5 shadow-[0_18px_60px_-25px_rgba(15,23,42,0.38)] transition-transform duration-500 hover:-translate-y-2 sm:p-3"
+                aria-label={`${featuredWork.title}の自主制作サイトを見る`}
+              >
+                <div className="browser-bar"><span /><span /><span /></div>
+                <img
+                  src={featuredWork.image}
+                  alt={`${featuredWork.title}の制作画面`}
+                  width={360}
+                  height={220}
+                  className="aspect-[1.5] w-full object-cover object-top"
+                />
+                <span className="flex items-center justify-between px-1 pt-2 text-[0.62rem] font-medium tracking-widest text-muted-foreground">
+                  <span>自主制作 / 01</span><span aria-hidden="true" className="text-accent">↗</span>
+                </span>
+              </a>
+              <ul className="mt-11 flex flex-wrap justify-end gap-x-5 gap-y-2 border-t border-border pt-4 lg:mt-10">
                 {["HTML / CSS / JS", "Responsive", "既存サイト修正"].map((item) => (
                   <li
                     key={item}
-                    className="flex items-center gap-3 font-display text-[0.7rem] tracking-[0.28em] text-muted-foreground"
+                    className="flex items-center gap-2 font-display text-[0.64rem] tracking-[0.16em] text-muted-foreground"
                   >
                     <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent" />
                     {item}
@@ -300,7 +357,7 @@ function HomePage() {
             />
             <div className="grid gap-12 md:grid-cols-[300px_minmax(0,1fr)] md:gap-20">
               <FadeIn>
-                <div className="relative mx-auto w-full max-w-[300px]">
+                <div className="portrait-frame relative mx-auto w-full max-w-[300px]">
                   <span
                     aria-hidden="true"
                     className="absolute -top-3 -left-3 h-full w-full border border-accent/30"
@@ -392,7 +449,7 @@ function HomePage() {
             <ul className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
               {services.map((service, i) => (
                 <FadeIn as="li" key={service.title} delay={i * 80} className="bg-background">
-                  <div className="group relative h-full p-10 transition-colors duration-500 hover:bg-surface md:p-14">
+                  <div className="service-card group relative h-full overflow-hidden p-10 transition-colors duration-500 hover:bg-surface md:p-14">
                     <span
                       aria-hidden="true"
                       className="absolute top-0 left-0 h-px w-0 bg-accent transition-all duration-700 group-hover:w-full"
@@ -429,22 +486,23 @@ function HomePage() {
             <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-14">
               {works.map((work, i) => (
                 <FadeIn as="li" key={work.id} delay={(i % 2) * 80} className="h-full">
-                  <article className="group flex h-full flex-col">
+                  <article className="work-card group flex h-full flex-col">
                     <a
                       href={work.url ?? "#works"}
-                      className="relative block overflow-hidden bg-muted"
+                      className="relative block overflow-hidden rounded-t-lg bg-muted"
                       aria-label={`${work.title}を見る`}
                       {...(work.url
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
                     >
+                      <div aria-hidden="true" className="browser-bar browser-bar-works relative z-10"><span /><span /><span /></div>
                       <img
                         src={work.image}
                         alt={`${work.title}のサイトイメージ`}
                         width={1024}
                         height={768}
                         loading="lazy"
-                        className="aspect-[4/3] h-auto w-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                        className="aspect-[4/3] h-auto w-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.055]"
                       />
                       <span
                         aria-hidden="true"
@@ -452,7 +510,7 @@ function HomePage() {
                       />
                       <span
                         aria-hidden="true"
-                        className="absolute bottom-5 left-5 inline-flex h-10 items-center rounded-full bg-background px-5 font-display text-[0.6rem] tracking-[0.28em] opacity-0 transition-all duration-500 group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0"
+                        className="absolute bottom-5 left-5 inline-flex h-10 items-center rounded-full bg-background px-5 font-display text-[0.6rem] tracking-[0.28em] transition-all duration-500 group-hover:opacity-100 md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0"
                       >
                         VIEW
                       </span>
@@ -534,6 +592,7 @@ function HomePage() {
             aria-hidden="true"
             className="hairline-grid pointer-events-none absolute inset-0 text-primary-foreground opacity-[0.18]"
           />
+          <div aria-hidden="true" className="contact-orbit pointer-events-none absolute -right-24 top-1/2 hidden h-[30rem] w-[30rem] -translate-y-1/2 rounded-full border border-white/10 lg:block" />
           <div className="relative mx-auto max-w-3xl text-center">
             <FadeIn>
               <p className="font-display text-[0.7rem] tracking-[0.32em] text-primary-foreground/60">
