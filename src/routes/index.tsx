@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
+import { Braces, Code2, LayoutTemplate, Monitor, Palette, Smartphone, Wrench } from "lucide-react";
 
 import { FadeIn } from "@/components/FadeIn";
 import { flow, navItems, profile, services, skills, works } from "@/data/site";
 import profilePhoto from "@/assets/profile.jpeg";
 import creativeWorkspace from "@/assets/creative-workspace.webp";
+
+const skillIcons = [Code2, Palette, Braces, Smartphone];
+const serviceIcons = [LayoutTemplate, Monitor, Smartphone, Wrench];
 
 function ScrollProgress() {
   const [progress, setProgress] = useState(0);
@@ -89,7 +93,7 @@ function Header() {
         >
           <span
             aria-hidden="true"
-            className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent transition-transform duration-500 group-hover:scale-150"
+            className="brand-dot h-1.5 w-1.5 shrink-0 rounded-full bg-accent transition-transform duration-500 group-hover:scale-150"
           />
           <span className="truncate">PORTFOLIO</span>
         </a>
@@ -237,6 +241,8 @@ function HomePage() {
             aria-hidden="true"
             className="pointer-events-none absolute -top-32 -right-32 hidden h-[34rem] w-[34rem] rounded-full border border-border/70 md:block"
           />
+          <div aria-hidden="true" className="hero-shape hero-shape-coral" />
+          <div aria-hidden="true" className="hero-shape hero-shape-sun" />
 
           <div className="relative mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.85fr)] lg:items-center lg:gap-8 xl:gap-16">
             <div>
@@ -254,12 +260,16 @@ function HomePage() {
                 >
                   <span className="block">見やすく、使いやすいWebサイトを、</span>
                   <span className="mt-1 block">
-                    <span className="relative inline-block">
+                    <span className="hero-highlight relative inline-block">
                       丁寧
-                      <span
+                      <svg
                         aria-hidden="true"
-                        className="absolute inset-x-0 -bottom-1 h-[0.35em] -z-10 bg-accent/15"
-                      />
+                        viewBox="0 0 140 20"
+                        preserveAspectRatio="none"
+                        className="hero-highlight-line absolute -bottom-2 left-0 w-full"
+                      >
+                        <path d="M4 12 C 38 4, 90 5, 136 9" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" pathLength="1" />
+                      </svg>
                     </span>
                     に作ります。
                   </span>
@@ -277,7 +287,7 @@ function HomePage() {
                 <div className="mt-12 flex flex-col gap-4 sm:flex-row">
                   <a
                     href="#works"
-                    className="group inline-flex h-14 items-center justify-center gap-3 rounded-full bg-primary px-10 text-sm tracking-[0.15em] text-primary-foreground transition-all duration-500 hover:-translate-y-0.5 hover:bg-accent hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.45)]"
+                    className="cta-primary group inline-flex h-14 items-center justify-center gap-3 rounded-full bg-primary px-10 text-sm tracking-[0.15em] text-primary-foreground transition-all duration-500 hover:-translate-y-0.5 hover:bg-accent hover:shadow-[0_18px_40px_-18px_rgba(39,89,195,0.5)]"
                   >
                     作品を見る
                     <span aria-hidden="true" className="transition-transform duration-500 group-hover:translate-x-1">
@@ -295,6 +305,8 @@ function HomePage() {
             </div>
 
             <FadeIn delay={480} className="hero-visual relative mx-auto w-full max-w-[480px] lg:mx-0 lg:ml-auto lg:pt-4">
+              <span aria-hidden="true" className="hero-spark hero-spark-top">✳</span>
+              <span aria-hidden="true" className="hero-spark hero-spark-bottom">✦</span>
               <div className="hero-visual-frame relative ml-auto w-[82%] overflow-hidden rounded-t-[140px] rounded-b-[12px] bg-surface shadow-[0_30px_80px_-35px_rgba(20,30,50,0.28)]">
                 <img
                   src={creativeWorkspace}
@@ -410,7 +422,7 @@ function HomePage() {
         <section
           id="skills"
           aria-labelledby="skills-title"
-          className="bg-surface px-6 py-24 md:py-36 lg:px-8"
+          className="skills-stage px-6 py-24 md:py-36 lg:px-8"
         >
           <div className="mx-auto max-w-6xl">
             <SectionHeading
@@ -422,9 +434,10 @@ function HomePage() {
             <ul className="border-t border-border">
               {skills.map((skill, i) => (
                 <FadeIn as="li" key={skill.title} delay={i * 60}>
-                  <div className="group grid gap-3 border-b border-border py-8 transition-colors duration-500 hover:bg-background md:grid-cols-[80px_260px_minmax(0,1fr)] md:items-baseline md:gap-10 md:px-6">
-                    <span className="font-display text-[0.7rem] tracking-[0.28em] text-accent">
-                      0{i + 1}
+                  <div className="skill-row group grid gap-3 border-b border-border py-8 transition-colors duration-500 hover:bg-background md:grid-cols-[80px_260px_minmax(0,1fr)] md:items-center md:gap-10 md:px-6">
+                    <span className="skill-icon" aria-hidden="true">
+                      {createElement(skillIcons[i]!, { size: 21, strokeWidth: 1.7 })}
+                      <span className="skill-index">0{i + 1}</span>
                     </span>
                     <h3 className="font-display text-lg font-bold tracking-wide transition-transform duration-500 md:group-hover:translate-x-1">
                       {skill.title}
@@ -449,12 +462,15 @@ function HomePage() {
             <ul className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
               {services.map((service, i) => (
                 <FadeIn as="li" key={service.title} delay={i * 80} className="bg-background">
-                  <div className="service-card group relative h-full overflow-hidden p-10 transition-colors duration-500 hover:bg-surface md:p-14">
+                  <div className={`service-card service-tone-${i} group relative h-full overflow-hidden p-10 transition-colors duration-500 hover:bg-surface md:p-14`}>
                     <span
                       aria-hidden="true"
                       className="absolute top-0 left-0 h-px w-0 bg-accent transition-all duration-700 group-hover:w-full"
                     />
-                    <span className="font-display text-4xl font-bold text-border transition-colors duration-500 group-hover:text-accent/40">
+                    <span className="service-icon" aria-hidden="true">
+                      {createElement(serviceIcons[i]!, { size: 25, strokeWidth: 1.5 })}
+                    </span>
+                    <span className="mt-8 block font-display text-4xl font-bold text-border transition-colors duration-500 group-hover:text-accent/40">
                       0{i + 1}
                     </span>
                     <h3 className="mt-6 font-display text-xl font-bold">{service.title}</h3>
@@ -472,7 +488,7 @@ function HomePage() {
         <section
           id="works"
           aria-labelledby="works-title"
-          className="bg-surface px-6 py-24 md:py-32 lg:px-8"
+          className="works-stage px-6 py-24 md:py-32 lg:px-8"
         >
           <div className="mx-auto max-w-6xl">
             <SectionHeading
@@ -486,7 +502,7 @@ function HomePage() {
             <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-14">
               {works.map((work, i) => (
                 <FadeIn as="li" key={work.id} delay={(i % 2) * 80} className="h-full">
-                  <article className="work-card group flex h-full flex-col">
+                  <article className={`work-card work-tone-${i} group flex h-full flex-col`}>
                     <a
                       href={work.url ?? "#works"}
                       className="relative block overflow-hidden rounded-t-lg bg-muted"
@@ -515,7 +531,7 @@ function HomePage() {
                         VIEW
                       </span>
                     </a>
-                    <div className="mt-6 flex flex-1 flex-col">
+                    <div className="work-card-body mt-6 flex flex-1 flex-col">
                       <span className="font-display text-[0.65rem] tracking-[0.28em] text-muted-foreground">
                         0{i + 1}
                       </span>
@@ -586,7 +602,7 @@ function HomePage() {
         <section
           id="contact"
           aria-labelledby="contact-title"
-          className="relative overflow-hidden bg-primary px-6 py-28 text-primary-foreground md:py-40 lg:px-8"
+          className="contact-stage relative overflow-hidden bg-primary px-6 py-28 text-primary-foreground md:py-40 lg:px-8"
         >
           <div
             aria-hidden="true"
