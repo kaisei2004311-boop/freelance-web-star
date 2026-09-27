@@ -2,6 +2,16 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Small, self-hosted subset for the two handwritten accents. */
+@font-face {
+  font-family: "Zen Kurenaido Accent";
+  src: url("./assets/zen-kurenaido-highlight.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+4E01, U+4F5C, U+5236, U+54C1, U+5BE7;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
@@ -374,6 +384,37 @@
   animation-delay: -5s;
 }
 .hero-highlight { isolation: isolate; }
+.handwritten-accent {
+  font-family: "Zen Kurenaido Accent", "Zen Kaku Gothic New", sans-serif;
+  font-size: 1.12em;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  transform: rotate(-4deg);
+  transform-origin: 50% 75%;
+}
+.handwritten-heading {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  font-family: "Zen Kurenaido Accent", "Zen Kaku Gothic New", sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
+  isolation: isolate;
+}
+.handwritten-heading::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 1%;
+  right: 0;
+  bottom: 0.07em;
+  height: 0.22em;
+  border-radius: 60% 20% 50% 25%;
+  background: color-mix(in oklab, var(--sunshine) 65%, transparent);
+  transform: rotate(-2deg);
+}
 .hero-highlight-line {
   z-index: -1;
   height: 16px;

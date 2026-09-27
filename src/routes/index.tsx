@@ -200,7 +200,7 @@ function SectionHeading({
         id={id}
         className="mt-6 font-display text-[1.75rem] leading-[1.45] font-bold tracking-tight md:text-[2.5rem] md:leading-[1.35]"
       >
-        {title}
+        {id === "works-title" ? <span className="handwritten-heading">{title}</span> : title}
       </h2>
       {lead && (
         <p
@@ -260,7 +260,7 @@ function HomePage() {
                 >
                   <span className="block">見やすく、使いやすいWebサイトを、</span>
                   <span className="mt-1 block">
-                    <span className="hero-highlight relative inline-block">
+                    <span className="hero-highlight handwritten-accent relative inline-block">
                       丁寧
                       <svg
                         aria-hidden="true"
