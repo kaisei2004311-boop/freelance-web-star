@@ -556,6 +556,13 @@
 .work-tone-1 { border-bottom: 3px solid var(--color-accent); }
 .work-tone-2 { border-bottom: 3px solid oklch(0.62 0.12 175); }
 .work-tone-3 { border-bottom: 3px solid oklch(0.7 0.16 91); }
+.work-tone-4 { border-bottom: 3px solid oklch(0.65 0.16 28); }
+@media (min-width: 768px) {
+  .work-card-feature { flex-direction: row; min-height: 430px; }
+  .work-card-feature > a { width: 55%; flex: none; border-radius: 0; }
+  .work-card-feature > a img { height: 100%; min-height: 430px; aspect-ratio: auto; object-fit: cover; }
+  .work-card-feature .work-card-body { margin-top: 0; padding: 32px; }
+}
 
 .contact-stage {
   background:

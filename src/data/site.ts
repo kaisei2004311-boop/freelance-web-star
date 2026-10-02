@@ -6,6 +6,7 @@ import shopSite from "@/assets/shop-site.png";
 import flowerSite from "@/assets/flower-site.png";
 import dayserviceSite from "@/assets/dayservice-site.png";
 import wataribuneSite from "@/assets/wataribune-site.png";
+import proposalSite from "@/assets/proposal-site.webp";
 
 export const profile = {
   name: "中嶋 海晴（KAISEI NAKAJIMA）",
@@ -99,6 +100,15 @@ export const works: Work[] = [
     description:
       "架空の渡船・釣り船サービスを想定して制作した自主制作・練習作品です。出船情報・料金・予約案内を見やすくまとめています。",
     url: "https://kaisei2004311-boop.github.io/wataribune-site/",
+  },
+  {
+    id: "proposal-service",
+    title: "プロポーズ演出サイト",
+    image: proposalSite,
+    tags: ["Next.js", "React", "Responsive"],
+    description:
+      "横浜・みなとみらいのプロポーズ・記念日演出サービスを想定した自主制作サイトです。演出の雰囲気が伝わるビジュアルと、プラン紹介から相談までの流れをまとめています。",
+    url: "https://kaisei2004311-boop.github.io/proposal-service/",
   },
 ];
 

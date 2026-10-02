@@ -496,8 +496,8 @@ function HomePage() {
 
             <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-14">
               {works.map((work, i) => (
-                <FadeIn as="li" key={work.id} delay={(i % 2) * 80} className="h-full">
-                  <article className={`work-card work-tone-${i} group flex h-full flex-col`}>
+                <FadeIn as="li" key={work.id} delay={(i % 2) * 80} className={`h-full ${i === works.length - 1 && works.length % 2 === 1 ? "md:col-span-2" : ""}`}>
+                  <article className={`work-card work-tone-${i} group flex h-full flex-col ${i === works.length - 1 && works.length % 2 === 1 ? "work-card-feature" : ""}`}>
                     <a
                       href={work.url ?? "#works"}
                       className="relative block overflow-hidden rounded-t-lg bg-muted"
