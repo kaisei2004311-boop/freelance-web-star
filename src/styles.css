@@ -501,6 +501,102 @@
     radial-gradient(circle at 4% 9%, color-mix(in oklab, var(--sunshine) 18%, transparent), transparent 28%),
     var(--blue-pale);
 }
+
+/* A scroll-led opening, followed by an interactive project gallery. */
+.hero-scroll-track { --hero-progress: 0; height: 165dvh; }
+.hero-scroll-track .hero-stage { position: sticky; top: 0; height: 100dvh; }
+.hero-scroll-track .hero-visual {
+  translate: calc(var(--hero-progress) * -3vw) calc(var(--hero-progress) * -4rem);
+  scale: calc(1 + var(--hero-progress) * 0.13);
+}
+.hero-scroll-track #hero-title {
+  translate: 0 calc(var(--hero-progress) * -2.5rem);
+}
+.hero-scroll-track .hero-shape-sun {
+  margin-right: calc(var(--hero-progress) * 12vw);
+  margin-bottom: calc(var(--hero-progress) * 8vh);
+}
+.hero-scroll-track .hairline-grid {
+  translate: 0 calc(var(--hero-progress) * -4rem);
+}
+.work-showcase {
+  background: radial-gradient(circle at 16% 12%, rgba(255,255,255,.14), transparent 33%), linear-gradient(135deg, #103c7c, #08244b 65%, #10203b);
+  isolation: isolate;
+  transition: background-color .45s ease;
+}
+.work-showcase-1 { background: radial-gradient(circle at 15% 12%, rgba(255,222,165,.2), transparent 35%), linear-gradient(135deg, #914a65, #4e365d 60%, #202b53); }
+.work-showcase-2 { background: radial-gradient(circle at 15% 12%, rgba(255,255,255,.16), transparent 35%), linear-gradient(135deg, #297968, #145b66 60%, #143651); }
+.work-showcase-3 { background: radial-gradient(circle at 15% 12%, rgba(255,255,255,.17), transparent 35%), linear-gradient(135deg, #7a5c95, #423d79 60%, #202954); }
+.work-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .24;
+  background-image: linear-gradient(to right, rgba(255,255,255,.16) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.16) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to right, black, transparent 75%);
+  pointer-events: none;
+}
+.work-showcase-number {
+  position: absolute;
+  right: -.02em;
+  top: -.32em;
+  font: 800 clamp(13rem, 35vw, 32rem)/1 var(--font-display);
+  letter-spacing: -.14em;
+  color: rgba(255,255,255,.055);
+  pointer-events: none;
+}
+.showcase-art { position: relative; perspective: 1000px; animation: showcase-image-in .7s cubic-bezier(.22,1,.36,1) both; }
+.showcase-art-back {
+  position: absolute;
+  inset: 8% -4% -5% 6%;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,.36);
+  transform: rotate(5deg);
+}
+.showcase-browser { transform: rotate(-2deg); transition: transform .65s cubic-bezier(.22,1,.36,1); }
+.showcase-art:hover .showcase-browser { transform: rotate(0deg) translateY(-7px); }
+.showcase-copy { animation: showcase-copy-in .55s .09s both; }
+.showcase-dot {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.showcase-dot::after {
+  content: "";
+  width: 1.5rem;
+  height: 3px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.38);
+  transition: width .3s, background .3s;
+}
+.showcase-dot:hover::after, .showcase-dot.is-active::after { background: white; width: 2rem; }
+.showcase-arrow {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color .3s, background .3s, transform .3s;
+}
+.showcase-arrow:hover { color: #123c7c; background: white; transform: translateY(-3px); }
+@keyframes showcase-image-in {
+  from { opacity: 0; transform: translateX(36px) rotate(3deg) scale(.93); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes showcase-copy-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 767px) {
+  .hero-scroll-track { height: auto; }
+  .hero-scroll-track .hero-stage { position: relative; height: auto; min-height: 100dvh; }
+  .work-showcase-number { top: 0; font-size: 13rem; }
+}
 .work-card {
   background: var(--color-background);
   border: 1px solid color-mix(in oklab, var(--color-primary) 10%, transparent);
@@ -577,4 +673,15 @@
   .work-card:hover,
   .service-card:hover .service-icon,
   .skill-row:hover .skill-icon { transform: none; }
+
+  .hero-scroll-track { height: auto; }
+  .hero-scroll-track .hero-stage { position: relative; height: auto; }
+  .hero-scroll-track .hero-visual,
+  .hero-scroll-track #hero-title,
+  .hero-scroll-track .hairline-grid { translate: none; scale: 1; }
+  .showcase-art,
+  .showcase-copy { animation: none; }
+  .showcase-browser,
+  .showcase-arrow,
+  .showcase-dot::after { transition: none; }
 }

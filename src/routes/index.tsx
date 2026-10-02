@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createElement, useEffect, useState } from "react";
+import { createElement, useEffect, useRef, useState } from "react";
 import { Braces, Code2, LayoutTemplate, Monitor, Palette, Smartphone, Wrench } from "lucide-react";
 
 import { FadeIn } from "@/components/FadeIn";
@@ -213,18 +213,85 @@ function SectionHeading({
   );
 }
 
+function WorkShowcase() {
+  const [active, setActive] = useState(0);
+  const work = works[active]!;
+  const move = (step: number) => setActive((index) => (index + step + works.length) % works.length);
+
+  return (
+    <FadeIn className="mb-16 md:mb-24">
+      <div className={`work-showcase work-showcase-${active} relative overflow-hidden rounded-[1.5rem] text-white`}>
+        <span aria-hidden="true" className="work-showcase-number">0{active + 1}</span>
+        <div className="relative z-10 grid gap-8 p-6 md:grid-cols-[minmax(0,1.15fr)_minmax(270px,0.85fr)] md:items-center md:gap-12 md:p-12 lg:gap-20 lg:p-16">
+          <div className="showcase-art" key={`art-${work.id}`}>
+            <div className="showcase-art-back" aria-hidden="true" />
+            <div className="showcase-browser relative overflow-hidden rounded-xl bg-white shadow-[0_35px_75px_-25px_rgba(0,0,0,0.55)]">
+              <div aria-hidden="true" className="browser-bar browser-bar-works"><span /><span /><span /></div>
+              <img src={work.image} alt={`${work.title}のサイトイメージ`} width={1024} height={768} loading="lazy" className="aspect-[4/3] w-full object-cover object-top" />
+            </div>
+          </div>
+          <div className="showcase-copy" key={`copy-${work.id}`} aria-live="polite">
+            <p className="font-display text-[0.65rem] tracking-[0.3em] text-white/65">WORKS &nbsp; / &nbsp; 0{active + 1} — 0{works.length}</p>
+            <h3 className="mt-6 font-display text-2xl leading-[1.5] font-bold md:text-3xl">{work.title}</h3>
+            <p className="mt-5 text-sm leading-8 text-white/75">{work.description}</p>
+            <a href={work.url ?? "#works"} target={work.url ? "_blank" : undefined} rel={work.url ? "noopener noreferrer" : undefined} className="showcase-link mt-8 inline-flex min-h-11 items-center gap-3 border-b border-white/50 text-sm tracking-[0.12em] transition-colors hover:border-white">
+              詳しく見る <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+        <div className="relative z-10 flex items-center justify-between gap-4 border-t border-white/20 px-6 py-4 md:px-12 lg:px-16">
+          <div className="flex gap-2" aria-label="作品の切り替え">
+            {works.map((item, index) => (
+              <button key={item.id} type="button" onClick={() => setActive(index)} aria-label={`${item.title}を表示`} aria-current={index === active ? "true" : undefined} className={`showcase-dot ${index === active ? "is-active" : ""}`} />
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <button type="button" onClick={() => move(-1)} aria-label="前の作品" className="showcase-arrow">←</button>
+            <button type="button" onClick={() => move(1)} aria-label="次の作品" className="showcase-arrow">→</button>
+          </div>
+        </div>
+      </div>
+    </FadeIn>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* ページ本体                                                          */
 /* ------------------------------------------------------------------ */
 
 function HomePage() {
   const featuredWork = works[1]!;
+  const heroTrack = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const track = heroTrack.current;
+    if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const distance = Math.max(1, track.offsetHeight - window.innerHeight);
+        const progress = Math.min(1, Math.max(0, -track.getBoundingClientRect().top / distance));
+        track.style.setProperty("--hero-progress", progress.toFixed(3));
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   return (
     <div id="top" className="min-h-dvh bg-background text-foreground">
       <Header />
 
       <main>
         {/* HERO */}
+        <div ref={heroTrack} className="hero-scroll-track">
         <section
           aria-labelledby="hero-title"
           className="hero-stage relative flex min-h-dvh items-center overflow-hidden px-6 pt-32 pb-20 lg:px-8"
@@ -357,6 +424,7 @@ function HomePage() {
             SCROLL
           </span>
         </section>
+        </div>
 
         {/* ABOUT */}
         <section id="about" aria-labelledby="about-title" className="px-6 py-24 md:py-36 lg:px-8">
@@ -498,6 +566,8 @@ function HomePage() {
               title="制作作品"
               lead="掲載しているものは、スキルをご確認いただくための自主制作サイトです。"
             />
+
+            <WorkShowcase />
 
             <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-14">
               {works.map((work, i) => (
