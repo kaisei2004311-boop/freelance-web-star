@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createElement, useEffect, useRef, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import { Braces, Code2, LayoutTemplate, Monitor, Palette, Smartphone, Wrench } from "lucide-react";
 
 import { FadeIn } from "@/components/FadeIn";
 import { flow, navItems, profile, services, skills, works } from "@/data/site";
 import profilePhoto from "@/assets/profile.jpeg";
-import creativeWorkspace from "@/assets/creative-workspace.webp";
 
 const skillIcons = [Code2, Palette, Braces, Smartphone];
 const serviceIcons = [LayoutTemplate, Monitor, Smartphone, Wrench];
@@ -260,38 +259,12 @@ function WorkShowcase() {
 /* ------------------------------------------------------------------ */
 
 function HomePage() {
-  const featuredWork = works[1]!;
-  const heroTrack = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const track = heroTrack.current;
-    if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let frame = 0;
-    const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const distance = Math.max(1, track.offsetHeight - window.innerHeight);
-        const progress = Math.min(1, Math.max(0, -track.getBoundingClientRect().top / distance));
-        track.style.setProperty("--hero-progress", progress.toFixed(3));
-      });
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
   return (
     <div id="top" className="min-h-dvh bg-background text-foreground">
       <Header />
 
       <main>
         {/* HERO */}
-        <div ref={heroTrack} className="hero-scroll-track">
         <section
           aria-labelledby="hero-title"
           className="hero-stage relative flex min-h-dvh items-center overflow-hidden px-6 pt-32 pb-20 lg:px-8"
@@ -311,8 +284,7 @@ function HomePage() {
           <div aria-hidden="true" className="hero-shape hero-shape-coral" />
           <div aria-hidden="true" className="hero-shape hero-shape-sun" />
 
-          <div className="relative mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.85fr)] lg:items-center lg:gap-8 xl:gap-16">
-            <div>
+          <div className="relative mx-auto w-full max-w-5xl">
               <FadeIn>
                 <p className="flex items-center gap-4 font-display text-[0.7rem] tracking-[0.32em] text-muted-foreground">
                   <span aria-hidden="true" className="h-px w-8 bg-accent" />
@@ -344,7 +316,7 @@ function HomePage() {
               </FadeIn>
 
               <FadeIn delay={240}>
-                <p className="mt-9 max-w-xl text-sm leading-8 text-muted-foreground">
+                <p className="mt-9 max-w-2xl text-sm leading-8 text-muted-foreground">
                   HTML / CSS /
                   JavaScriptを中心に、LP制作・レスポンシブ対応・既存サイトの修正など、Web制作のご相談に対応しています。
                 </p>
@@ -369,52 +341,6 @@ function HomePage() {
                   </a>
                 </div>
               </FadeIn>
-            </div>
-
-            <FadeIn delay={480} className="hero-visual relative mx-auto w-full max-w-[480px] lg:mx-0 lg:ml-auto lg:pt-4">
-              <span aria-hidden="true" className="hero-spark hero-spark-top">✳</span>
-              <span aria-hidden="true" className="hero-spark hero-spark-bottom">✦</span>
-              <div className="hero-visual-frame relative ml-auto w-[82%] overflow-hidden rounded-t-[140px] rounded-b-[12px] bg-surface shadow-[0_30px_80px_-35px_rgba(20,30,50,0.28)]">
-                <img
-                  src={creativeWorkspace}
-                  alt="デザインを検討するワークスペースのイメージ"
-                  width={960}
-                  height={1200}
-                  fetchPriority="high"
-                  className="aspect-[4/5] w-full object-cover"
-                />
-              </div>
-              <a
-                href={featuredWork.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hero-project-card group absolute -bottom-5 left-0 w-[58%] bg-background p-2.5 shadow-[0_18px_60px_-25px_rgba(15,23,42,0.38)] transition-transform duration-500 hover:-translate-y-2 sm:p-3"
-                aria-label={`${featuredWork.title}の自主制作サイトを見る`}
-              >
-                <div className="browser-bar"><span /><span /><span /></div>
-                <img
-                  src={featuredWork.image}
-                  alt={`${featuredWork.title}の制作画面`}
-                  width={360}
-                  height={220}
-                  className="aspect-[1.5] w-full object-cover object-top"
-                />
-                <span className="flex items-center justify-between px-1 pt-2 text-[0.62rem] font-medium tracking-widest text-muted-foreground">
-                  <span>自主制作 / 01</span><span aria-hidden="true" className="text-accent">↗</span>
-                </span>
-              </a>
-              <ul className="mt-11 flex flex-wrap justify-end gap-x-5 gap-y-2 border-t border-border pt-4 lg:mt-10">
-                {["HTML / CSS / JS", "Responsive", "既存サイト修正"].map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-2 font-display text-[0.64rem] tracking-[0.16em] text-muted-foreground"
-                  >
-                    <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
           </div>
 
           <span
@@ -424,7 +350,6 @@ function HomePage() {
             SCROLL
           </span>
         </section>
-        </div>
 
         {/* ABOUT */}
         <section id="about" aria-labelledby="about-title" className="px-6 py-24 md:py-36 lg:px-8">
