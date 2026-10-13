@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Market | ショッピングサイト</title>
+  <meta name="description" content="売れる雰囲気を意識した、シンプルでモダンなショッピングサイトのサンプルです。" />
+  <style>
+    :root{
+      --bg:#f7f7f9;
+      --surface:#ffffff;
+      --surface-2:#f1f3f6;
+      --text:#1d1f23;
+      --muted:#6b7280;
+      --primary:#111827;
+      --accent:#ff6b35;
+      --accent-2:#ff8c5a;
+      --line:#e5e7eb;
+      --success:#16a34a;
+      --shadow:0 12px 30px rgba(17,24,39,0.08);
+      --radius:18px;
+      --radius-sm:12px;
+      --container:1200px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button, input, textarea{
+      font:inherit;
+    }
+
+    .container{
+      width:min(100% - 32px, var(--container));
+      margin-inline:auto;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff2ec;
+      color:var(--accent);
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .section{
+      padding:72px 0;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:clamp(28px, 4vw, 42px);
+      line-height:1.15;
+    }
+
+    .section-head p{
+      margin:8px 0 0;
+      color:var(--muted);
+      max-width:680px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border:none;
+      border-radius:999px;
+      padding:14px 22px;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .2s ease, opacity .2s ease, background .2s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+      box-shadow:0 10px 24px rgba(255,107,53,.25);
+    }
+
+    .btn-primary:hover{
+      background:var(--accent-2);
+    }
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--primary);
+      border:1px solid var(--line);
+    }
+
+    .btn-dark{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .topbar{
+      background:var(--primary);
+      color:#fff;
+      text-align:center;
+      padding:10px 16px;
+      font-size:14px;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(247,247,249,0.88);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(229,231,235,0.7);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      min-height:76px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+
+    .logo-mark{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, var(--accent), #ffb088);
+      color:#fff;
+      box-shadow:var(--shadow);
+      font-weight:900;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+
+    .nav-links a:hover{
+      color:var(--text);
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .icon-btn{
+      position:relative;
+      border:none;
+      background:#fff;
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .cart-count{
+      position:absolute;
+      top:-6px;
+      right:-4px;
+      min-width:22px;
+      height:22px;
+      padding:0 6px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:var(--accent);
+      color:#fff;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .hero{
+      padding:52px 0 36px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .hero-card{
+      background:linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      color:#fff;
+      border-radius:30px;
+      padding:clamp(28px, 4vw, 54px);
+      min-height:540px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -60px -80px auto;
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.18), rgba(255,255,255,0));
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:60px auto auto -40px;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,107,53,.38), rgba(255,107,53,0));
+    }
+
+    .hero-copy{
+      position:relative;
+      z-index:1;
+      max-width:640px;
+    }
+
+    .hero-copy h1{
+      margin:16px 0 18px;
+      font-size:clamp(40px, 7vw, 72px);
+      line-height:1.02;
+      letter-spacing:-1px;
+    }
+
+    .hero-copy p{
+      margin:0 0 28px;
+      color:rgba(255,255,255,.82);
+      font-size:18px;
+      max-width:560px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:28px;
+    }
+
+    .hero-points{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .hero-point{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .hero-point strong{
+      display:block;
+      font-size:20px;
+      margin-bottom:4px;
+    }
+
+    .hero-side{
+      display:grid;
+      grid-template-rows:1fr auto;
+      gap:20px;
+    }
+
+    .feature-card{
+      background:var(--surface);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:26px;
+      display:grid;
+      gap:18px;
+      overflow:hidden;
+      min-height:260px;
+      position:relative;
+    }
+
+    .feature-visual{
+      border-radius:22px;
+      min-height:220px;
+      background:
+        linear-gradient(135deg, rgba(255,107,53,.95), rgba(255,176,136,.9)),
+        #ddd;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:48px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:20px;
+    }
+
+    .mini-card{
+      background:var(--surface);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .mini-card h3,
+    .feature-card h3{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .categories{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+    }
+
+    .category-card{
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:20px;
+      box-shadow:var(--shadow);
+      transition:transform .2s ease, border-color .2s ease;
+    }
+
+    .category-card:hover{
+      transform:translateY(-4px);
+      border-color:#ffd0bd;
+    }
+
+    .category-icon{
+      width:56px;
+      height:56px;
+      display:grid;
+      place-items:center;
+      border-radius:18px;
+      background:#fff3ee;
+      font-size:24px;
+      margin-bottom:14px;
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:20px;
+    }
+
+    .product-card{
+      background:var(--surface);
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .product-media{
+      aspect-ratio:1 / 1;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.7), rgba(255,255,255,0) 30%),
+        linear-gradient(135deg, #ffcdbb, #ffe4da 45%, #f3f4f6 100%);
+      display:grid;
+      place-items:center;
+      font-size:54px;
+    }
+
+    .product-body{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      flex:1;
+    }
+
+    .product-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#fff3ee;
+      color:var(--accent);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .price{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.3px;
+    }
+
+    .product-actions{
+      display:flex;
+      gap:10px;
+      margin-top:auto;
+    }
+
+    .product-actions .btn{
+      flex:1;
+      padding:12px 14px;
+      border-radius:14px;
+    }
+
+    .promo{
+      padding:20px 0 0;
+    }
+
+    .promo-card{
+      background:linear-gradient(120deg, #ff6b35 0%, #ff956b 55%, #ffd8c8 100%);
+      border-radius:30px;
+      padding:32px;
+      color:#fff;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:center;
+      box-shadow:var(--shadow);
+    }
+
+    .promo-card h2{
+      margin:0 0 12px;
+      font-size:clamp(30px, 5vw, 48px);
+      line-height:1.1;
+    }
+
+    .promo-visual{
+      min-height:220px;
+      border-radius:24px;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.28);
+      display:grid;
+      place-items:center;
+      font-size:78px;
+      font-weight:900;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 360px;
+      gap:24px;
+      align-items:start;
+    }
+
+    .cart-panel{
+      position:sticky;
+      top:96px;
+      background:var(--surface);
+      border-radius:28px;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .cart-list{
+      display:grid;
+      gap:12px;
+      margin:18px 0 20px;
+    }
+
+    .cart-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px;
+      border-radius:16px;
+      background:var(--surface-2);
+    }
+
+    .cart-item strong{
+      display:block;
+      font-size:14px;
+    }
+
+    .cart-item span{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .cart-summary{
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      display:grid;
+      gap:10px;
+    }
+
+    .summary-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .summary-row.total{
+      font-size:20px;
+      font-weight:900;
+    }
+
+    .form-card{
+      background:var(--surface);
+      border-radius:28px;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:28px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:16px;
+    }
+
+    .field{
+      display:grid;
+      gap:8px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select{
+      width:100%;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus{
+      border-color:#ffb699;
+      box-shadow:0 0 0 4px rgba(255,107,53,.12);
+    }
+
+    .field textarea{
+      min-height:140px;
+      resize:vertical;
+    }
+
+    footer{
+      padding:36px 0 48px;
+    }
+
+    .footer-card{
+      background:var(--primary);
+      color:#fff;
+      border-radius:28px;
+      padding:28px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:20px;
+      align-items:center;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color:rgba(255,255,255,.78);
+    }
+
+    .notice{
+      margin-top:14px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .mobile-menu{
+      display:none;
+    }
+
+    @media (max-width: 1080px){
+      .hero-grid,
+      .layout,
+      .promo-card{
+        grid-template-columns:1fr;
+      }
+
+      .products{
+        grid-template-columns:repeat(3, 1fr);
+      }
+
+      .categories{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .cart-panel{
+        position:static;
+      }
+    }
+
+    @media (max-width: 780px){
+      .nav{
+        min-height:68px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .mobile-menu{
+        display:inline-flex;
+      }
+
+      .hero-card{
+        min-height:auto;
+      }
+
+      .hero-points,
+      .mini-grid,
+      .products,
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .categories{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .footer-card{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 560px){
+      .container{
+        width:min(100% - 20px, var(--container));
+      }
+
+      .section{
+        padding:56px 0;
+      }
+
+      .hero{
+        padding-top:30px;
+      }
+
+      .categories{
+        grid-template-columns:1fr;
+      }
+
+      .nav-actions .btn-dark{
+        display:none;
+      }
+
+      .product-actions{
+        flex-direction:column;
+      }
+
+      .promo-card,
+      .hero-card,
+      .feature-card,
+      .mini-card,
+      .form-card,
+      .cart-panel,
+      .footer-card{
+        border-radius:22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">本日限定：新規会員登録で 10% OFF クーポン配布中</div>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo" aria-label="Nova Market ホーム">
+        <span class="logo-mark">N</span>
+        <span>Nova Market</span>
+      </a>
+
+      <nav class="nav-links" aria-label="メインナビゲーション">
+        <a href="#home">ホーム</a>
+        <a href="#categories">カテゴリ</a>
+        <a href="#products">人気商品</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn mobile-menu" aria-label="メニュー">
+          ☰
+        </button>
+        <button class="icon-btn" aria-label="お気に入り">
+          ♡
+        </button>
+        <button class="icon-btn" aria-label="カート">
+          🛒
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="#products" class="btn btn-dark">今すぐ見る</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="badge">人気急上昇のセレクトショップ</span>
+            <h1>欲しいが見つかる。<br>売れるデザインのEC体験。</h1>
+            <p>
+              毎日の生活を少しアップデートする、今っぽくて使いやすいアイテムを厳選。
+              見やすく、買いやすく、ついカートに入れたくなるショッピングサイトをイメージしました。
+            </p>
+            <div class="hero-actions">
+              <a href="#products" class="btn btn-primary">人気商品を見る</a>
+              <a href="#contact" class="btn btn-secondary">問い合わせる</a>
+            </div>
+
+            <div class="hero-points">
+              <div class="hero-point">
+                <strong>24H</strong>
+                <span>いつでも注文OK</span>
+              </div>
+              <div class="hero-point">
+                <strong>4.8★</strong>
+                <span>高評価レビュー想定</span>
+              </div>
+              <div class="hero-point">
+                <strong>Free</strong>
+                <span>一定額以上で送料無料</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="feature-card">
+            <div>
+              <h3>今週のおすすめ</h3>
+              <p class="muted">特集商品やキャンペーンを目立たせて、購入導線を強くする構成です。</p>
+            </div>
+            <div class="feature-visual">SALE</div>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <h3>最短発送</h3>
+              <p class="muted">スピード感を伝える訴求で、購入の後押しに。</p>
+            </div>
+            <div class="mini-card">
+              <h3>返品対応</h3>
+              <p class="muted">安心感のある文言でコンバージョン改善を意識。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>注目カテゴリ</h2>
+            <p>売る系のECサイトらしく、最初に目に入るカテゴリ導線を用意。商品探しをスムーズにします。</p>
+          </div>
+        </div>
+
+        <div class="categories">
+          <article class="category-card">
+            <div class="category-icon">👕</div>
+            <h3>アパレル</h3>
+            <p class="muted">着回ししやすい定番とトレンドをバランス良く。</p>
+          </article>
+
+          <article class="category-card">
+            <div class="category-icon">⌚</div>
+            <h3>ガジェット</h3>
+            <p class="muted">機能性とデザイン性を兼ね備えた人気アイテム。</p>
+          </article>
+
+          <article class="category-card">
+            <div class="category-icon">🧴</div>
+            <h3>ライフスタイル</h3>
+            <p class="muted">日常を少し便利に、少し豊かにするセレクト。</p>
+          </article>
+
+          <article class="category-card">
+            <div class="category-icon">🎁</div>
+            <h3>ギフト</h3>
+            <p class="muted">贈り物にも選びやすい、見栄えの良いラインアップ。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="container layout">
+        <div>
+          <div class="section-head">
+            <div>
+              <h2>人気商品</h2>
+              <p>購入ボタンをわかりやすく配置し、価格・特徴・カテゴリがひと目で伝わる構成です。</p>
+            </div>
+          </div>
+
+          <div class="products">
+            <article class="product-card">
+              <div class="product-media">🧥</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">人気No.1</span>
+                  <span class="muted">アパレル</span>
+                </div>
+                <h3>Urban Light Jacket</h3>
+                <p class="muted">軽く羽織れてシルエットがきれい。季節の変わり目にぴったり。</p>
+                <div class="price">¥6,980</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Urban Light Jacket" data-price="6980">カートに追加</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-media">🎧</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">再入荷</span>
+                  <span class="muted">ガジェット</span>
+                </div>
+                <h3>Quiet Beat Headphones</h3>
+                <p class="muted">通勤や作業時間を快適にする、ミニマルデザインのヘッドホン。</p>
+                <div class="price">¥9,800</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Quiet Beat Headphones" data-price="9800">カートに追加</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-media">👜</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">定番</span>
+                  <span class="muted">ギフト</span>
+                </div>
+                <h3>Soft Mini Tote</h3>
+                <p class="muted">シーンを選ばず使えるサイズ感。プレゼント需要にも対応。</p>
+                <div class="price">¥5,400</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Soft Mini Tote" data-price="5400">カートに追加</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-media">🕯️</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">特集</span>
+                  <span class="muted">ライフスタイル</span>
+                </div>
+                <h3>Aroma Calm Candle</h3>
+                <p class="muted">空間をやさしく整える、パッケージ映えする人気アイテム。</p>
+                <div class="price">¥2,980</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Aroma Calm Candle" data-price="2980">カートに追加</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-media">⌚</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">限定</span>
+                  <span class="muted">ガジェット</span>
+                </div>
+                <h3>Core Smart Watch</h3>
+                <p class="muted">日常使いにちょうどいい、機能と見た目のバランスが魅力。</p>
+                <div class="price">¥12,800</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Core Smart Watch" data-price="12800">カートに追加</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-media">👟</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">売れ筋</span>
+                  <span class="muted">アパレル</span>
+                </div>
+                <h3>Daily Move Sneakers</h3>
+                <p class="muted">歩きやすさと見た目を両立した、毎日履きたくなる一足。</p>
+                <div class="price">¥7,600</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Daily Move Sneakers" data-price="7600">カートに追加</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-media">📱</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">新着</span>
+                  <span class="muted">ガジェット</span>
+                </div>
+                <h3>Snap Charge Stand</h3>
+                <p class="muted">デスク周りをすっきり見せる、便利なワイヤレス充電スタンド。</p>
+                <div class="price">¥4,200</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Snap Charge Stand" data-price="4200">カートに追加</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-media">🧴</div>
+              <div class="product-body">
+                <div class="product-meta">
+                  <span class="tag">おすすめ</span>
+                  <span class="muted">ライフスタイル</span>
+                </div>
+                <h3>Clean Hand Care Set</h3>
+                <p class="muted">見た目も香りも心地いい、ギフトにも人気のケアセット。</p>
+                <div class="price">¥3,600</div>
+                <div class="product-actions">
+                  <button class="btn btn-secondary">詳細</button>
+                  <button class="btn btn-primary add-to-cart" data-name="Clean Hand Care Set" data-price="3600">カートに追加</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="cart-panel" aria-label="カート">
+          <h3>カート</h3>
+          <p class="muted">追加した商品がここに表示されます。</p>
+
+          <div class="cart-list" id="cartList">
+            <div class="cart-item">
+              <div>
+                <strong>カートは空です</strong>
+                <span>気になる商品を追加してください</span>
+              </div>
+              <div>—</div>
+            </div>
+          </div>
+
+          <div class="cart-summary">
+            <div class="summary-row">
+              <span>商品数</span>
+              <strong id="itemCount">0点</strong>
+            </div>
+            <div class="summary-row">
+              <span>小計</span>
+              <strong id="subtotal">¥0</strong>
+            </div>
+            <div class="summary-row">
+              <span>送料</span>
+              <strong id="shipping">¥0</strong>
+            </div>
+            <div class="summary-row total">
+              <span>合計</span>
+              <strong id="total">¥0</strong>
+            </div>
+            <button class="btn btn-dark" id="checkoutBtn">購入に進む</button>
+            <div class="notice">※ デモサイトのため実際の決済は行いません。</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="promo">
+      <div class="container">
+        <div class="promo-card">
+          <div>
+            <h2>まとめ買いで、もっとお得に。</h2>
+            <p>
+              キャンペーンバナーを入れることで、売れ筋商品や季節施策をしっかり訴求できます。
+              ECサイトらしい「今買う理由」をつくるのに効果的です。
+            </p>
+            <a href="#products" class="btn btn-secondary">キャンペーン商品を見る</a>
+          </div>
+          <div class="promo-visual">10%OFF</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>お問い合わせ</h2>
+            <p>商品についての質問、導入相談、在庫確認などを受け付けるフォームです。</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form class="form-grid" id="contactForm">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="山田 太郎" required />
+            </div>
+
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" placeholder="example@email.com" required />
+            </div>
+
+            <div class="field">
+              <label for="type">お問い合わせ種別</label>
+              <select id="type" name="type">
+                <option>商品について</option>
+                <option>配送について</option>
+                <option>返品・交換について</option>
+                <option>その他</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="order">注文番号</label>
+              <input id="order" name="order" type="text" placeholder="任意" />
+            </div>
+
+            <div class="field full">
+              <label for="message">内容</label>
+              <textarea id="message" name="message" placeholder="お問い合わせ内容をご入力ください。"></textarea>
+            </div>
+
+            <div class="field full">
+              <button class="btn btn-primary" type="submit">送信する</button>
+            </div>
+          </form>
+          <p class="notice" id="formMessage"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-card">
+        <div>
+          <div class="logo" style="margin-bottom:12px;">
+            <span class="logo-mark">N</span>
+            <span>Nova Market</span>
+          </div>
+          <p style="margin:0; color:rgba(255,255,255,.78);">
+            使いやすさと売れやすさを意識した、シンプルなショッピングサイトデモ。
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#home">ホーム</a>
+          <a href="#categories">カテゴリ</a>
+          <a href="#products">商品一覧</a>
+          <a href="#contact">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const addButtons = document.querySelectorAll(".add-to-cart");
+    const cartCount = document.getElementById("cartCount");
+    const itemCount = document.getElementById("itemCount");
+    const subtotal = document.getElementById("subtotal");
+    const shipping = document.getElementById("shipping");
+    const total = document.getElementById("total");
+    const cartList = document.getElementById("cartList");
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    const contactForm = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+
+    const cart = [];
+
+    function formatPrice(value){
+      return "¥" + value.toLocaleString("ja-JP");
+    }
+
+    function renderCart(){
+      const count = cart.length;
+      const subtotalValue = cart.reduce((sum, item) => sum + item.price, 0);
+      const shippingValue = count === 0 ? 0 : subtotalValue >= 10000 ? 0 : 600;
+      const totalValue = subtotalValue + shippingValue;
+
+      cartCount.textContent = count;
+      itemCount.textContent = count + "点";
+      subtotal.textContent = formatPrice(subtotalValue);
+      shipping.textContent = formatPrice(shippingValue);
+      total.textContent = formatPrice(totalValue);
+
+      if(count === 0){
+        cartList.innerHTML = `
+          <div class="cart-item">
+            <div>
+              <strong>カートは空です</strong>
+              <span>気になる商品を追加してください</span>
+            </div>
+            <div>—</div>
+          </div>
+        `;
+        return;
+      }
+
+      cartList.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+          <div>
+            <strong>${item.name}</strong>
+            <span>${formatPrice(item.price)}</span>
+          </div>
+          <button
+            class="btn btn-secondary remove-btn"
+            data-index="${index}"
+            style="padding:8px 12px; border-radius:12px;"
+          >
+            削除
+          </button>
+        </div>
+      `).join("");
+
+      document.querySelectorAll(".remove-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const index = Number(button.dataset.index);
+          cart.splice(index, 1);
+          renderCart();
+        });
+      });
+    }
+
+    addButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.dataset.name;
+        const price = Number(button.dataset.price);
+        cart.push({ name, price });
+        renderCart();
+
+        const originalText = button.textContent;
+        button.textContent = "追加しました";
+        button.disabled = true;
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+        }, 700);
+      });
+    });
+
+    checkoutBtn.addEventListener("click", () => {
+      if(cart.length === 0){
+        alert("カートに商品が入っていません。");
+        return;
+      }
+      alert("デモサイトのため、ここでは購入完了処理は行いません。");
+    });
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formMessage.textContent = "お問い合わせを受け付けました。担当よりご連絡いたします。";
+      formMessage.style.color = "#16a34a";
+      contactForm.reset();
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

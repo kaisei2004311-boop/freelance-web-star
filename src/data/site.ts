@@ -72,7 +72,7 @@ export const works: Work[] = [
     tags: ["HTML", "CSS", "JavaScript", "Responsive"],
     description:
       "架空のショップを想定して制作した自主制作・練習作品です。商品一覧やカート操作など、買い物の流れが分かりやすい構成にしています。",
-    url: "https://kaisei2004311-boop.github.io/shop-site/",
+    url: "/freelance-web-star/works/shop-site/",
   },
   {
     id: "flower-site",
@@ -81,7 +81,7 @@ export const works: Work[] = [
     tags: ["HTML", "CSS", "JavaScript", "Responsive"],
     description:
       "架空の花屋を想定して制作した自主制作・練習作品です。コレクション紹介からお問い合わせまでを、上品なトーンで1ページにまとめています。",
-    url: "https://kaisei2004311-boop.github.io/flower-site/",
+    url: "/freelance-web-star/works/flower-site/",
   },
   {
     id: "dayservice-site",
@@ -90,7 +90,7 @@ export const works: Work[] = [
     tags: ["HTML", "CSS", "Responsive"],
     description:
       "架空のデイサービス施設を想定して制作した自主制作・練習作品です。サービス内容や1日の流れ、アクセス情報を分かりやすく整理しています。",
-    url: "https://kaisei2004311-boop.github.io/dayservice-site/",
+    url: "/freelance-web-star/works/dayservice-site/",
   },
   {
     id: "wataribune-site",
@@ -99,7 +99,7 @@ export const works: Work[] = [
     tags: ["HTML", "CSS", "JavaScript", "Responsive"],
     description:
       "架空の渡船・釣り船サービスを想定して制作した自主制作・練習作品です。出船情報・料金・予約案内を見やすくまとめています。",
-    url: "https://kaisei2004311-boop.github.io/wataribune-site/",
+    url: "/freelance-web-star/works/wataribune-site/",
   },
   {
     id: "proposal-service",
@@ -108,7 +108,7 @@ export const works: Work[] = [
     tags: ["Next.js", "React", "Responsive"],
     description:
       "横浜・みなとみらいのプロポーズ・記念日演出サービスを想定した自主制作サイトです。演出の雰囲気が伝わるビジュアルと、プラン紹介から相談までの流れをまとめています。",
-    url: "https://kaisei2004311-boop.github.io/proposal-service/",
+    url: "/freelance-web-star/works/proposal-service/",
   },
 ];
 

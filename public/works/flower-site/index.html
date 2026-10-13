@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Fleur | 高級感のあるフラワーブティック</title>
+  <meta name="description" content="Maison Fleurは、洗練された花束と上質なアレンジメントを提案するラグジュアリーなフラワーブティックです。特別な贈り物にふさわしい花をご用意しています。" />
+  <style>
+    :root {
+      --bg: #0e0e0d;
+      --bg-soft: #151514;
+      --panel: #1b1b19;
+      --panel-2: #22211f;
+      --line: rgba(212, 180, 106, 0.22);
+      --gold: #d4b46a;
+      --gold-soft: #f0dfb0;
+      --text: #f5f0e6;
+      --muted: #b9b1a2;
+      --white: #ffffff;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "Yu Serif", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(212, 180, 106, 0.08), transparent 20%),
+        radial-gradient(circle at bottom left, rgba(212, 180, 106, 0.05), transparent 18%),
+        linear-gradient(180deg, #0b0b0b 0%, #111110 100%);
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.84rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin: 0 0 16px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .section-lead {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 1rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(212, 180, 106, 0.10);
+    }
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-main {
+      font-size: 1.35rem;
+      color: var(--gold-soft);
+      letter-spacing: 0.16em;
+    }
+
+    .logo-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--gold-soft);
+    }
+
+    .hero {
+      padding: 110px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      line-height: 1.08;
+      margin: 0 0 24px;
+      font-weight: 600;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 0 34px;
+      font-size: 1.02rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .hero-chip {
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(212, 180, 106, 0.05);
+      font-size: 0.88rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 24px;
+      min-width: 180px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.96;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #b9964f, #e3c985);
+      color: #1a1712;
+      box-shadow: 0 10px 30px rgba(212, 180, 106, 0.16);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      color: var(--gold-soft);
+      background: transparent;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .visual-frame {
+      min-height: 620px;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.35)),
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08), transparent 24%),
+        linear-gradient(135deg, #3a3028 0%, #1e1a18 45%, #111111 100%);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(212, 180, 106, 0.14);
+    }
+
+    .visual-frame::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(212, 180, 106, 0.18);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    .floral-art {
+      position: absolute;
+      inset: 0;
+    }
+
+    .bloom {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(0.2px);
+      opacity: 0.96;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+    }
+
+    .b1 { width: 140px; height: 140px; background: #6d1020; top: 12%; left: 18%; }
+    .b2 { width: 96px; height: 96px; background: #d7b26d; top: 18%; left: 42%; }
+    .b3 { width: 124px; height: 124px; background: #f2e2c4; top: 28%; right: 18%; }
+    .b4 { width: 110px; height: 110px; background: #8e1530; top: 42%; left: 28%; }
+    .b5 { width: 88px; height: 88px; background: #c29b59; top: 48%; right: 30%; }
+    .b6 { width: 132px; height: 132px; background: #f4ead9; bottom: 16%; left: 40%; }
+
+    .leaf {
+      position: absolute;
+      background: linear-gradient(180deg, #3b4e33, #1f2a1d);
+      border-radius: 100px 0 100px 0;
+      opacity: 0.9;
+      transform-origin: bottom center;
+    }
+
+    .l1 { width: 34px; height: 160px; left: 32%; top: 30%; transform: rotate(-16deg); }
+    .l2 { width: 28px; height: 170px; left: 48%; top: 26%; transform: rotate(8deg); }
+    .l3 { width: 30px; height: 180px; right: 30%; top: 32%; transform: rotate(18deg); }
+    .l4 { width: 24px; height: 130px; left: 36%; top: 52%; transform: rotate(-24deg); }
+    .l5 { width: 24px; height: 130px; right: 36%; top: 54%; transform: rotate(24deg); }
+
+    .signature {
+      position: absolute;
+      left: 34px;
+      bottom: 30px;
+      right: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      color: #efe5d0;
+    }
+
+    .signature strong {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .signature span {
+      color: rgba(239, 229, 208, 0.76);
+      font-size: 0.92rem;
+    }
+
+    .signature-mark {
+      font-size: 2.2rem;
+      color: rgba(212, 180, 106, 0.7);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 42px;
+    }
+
+    .product-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 180, 106, 0.10);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      height: 260px;
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.10), transparent 20%),
+        linear-gradient(135deg, #2c201b, #171514 50%, #111111 100%);
+    }
+
+    .product-image::before,
+    .product-image::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    .product-image::before {
+      width: 120px;
+      height: 120px;
+      background: #7d1429;
+      left: 36px;
+      top: 38px;
+      box-shadow:
+        92px 24px 0 #e6c47d,
+        36px 110px 0 #f4ebdc;
+    }
+
+    .product-image::after {
+      width: 10px;
+      height: 130px;
+      background: #42553a;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      border-radius: 30px;
+      box-shadow:
+        -34px 8px 0 #42553a,
+        34px 0 0 #42553a;
+    }
+
+    .product-body {
+      padding: 24px;
+    }
+
+    .product-body h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .product-body p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .price {
+      color: var(--gold-soft);
+      font-size: 1.06rem;
+      font-weight: 600;
+    }
+
+    .about-panel {
+      margin-top: 42px;
+      background: linear-gradient(180deg, rgba(212, 180, 106, 0.05), rgba(255,255,255,0.01));
+      border: 1px solid rgba(212, 180, 106, 0.10);
+      border-radius: 28px;
+      padding: 34px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .about-item {
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(212, 180, 106, 0.08);
+    }
+
+    .about-item h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: var(--gold-soft);
+      font-size: 1.08rem;
+    }
+
+    .about-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      margin-top: 42px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(212, 180, 106, 0.10);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: var(--gold-soft);
+      font-size: 1.2rem;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(212, 180, 106, 0.14);
+    }
+
+    .info-row strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 0.94rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(212, 180, 106, 0.14);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #8f8678;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(212, 180, 106, 0.4);
+      box-shadow: 0 0 0 4px rgba(212, 180, 106, 0.08);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    footer {
+      padding: 32px 0 50px;
+      color: #938877;
+      text-align: center;
+      font-size: 0.92rem;
+      border-top: 1px solid rgba(212, 180, 106, 0.08);
+      margin-top: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .products,
+      .about-grid,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .nav {
+        justify-content: center;
+      }
+
+      .visual-frame {
+        min-height: 480px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero {
+        padding-top: 80px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .info-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .panel,
+      .about-panel {
+        padding: 22px;
+      }
+
+      .signature {
+        left: 24px;
+        right: 24px;
+        bottom: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Maison Fleur ホーム">
+        <span class="logo-main">MAISON FLEUR</span>
+        <span class="logo-sub">Luxury Floral Boutique</span>
+      </a>
+      <nav class="nav">
+        <a href="#collection">Collection</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#boutique">Boutique</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Luxury Floral Design</span>
+          <h1>
+            記憶に残る贈り物を、<br />
+            一輪一輪に宿して。
+          </h1>
+          <p>
+            Maison Fleurは、特別な瞬間にふさわしい花を提案する
+            ラグジュアリーフラワーブティックです。色彩、質感、余韻にまでこだわり、
+            大切な方へ贈る美しさを丁寧に仕立てます。
+          </p>
+
+          <div class="hero-meta">
+            <span class="hero-chip">完全予約オーダー対応</span>
+            <span class="hero-chip">法人装花相談</span>
+            <span class="hero-chip">上質ギフトラッピング</span>
+          </div>
+
+          <div class="hero-buttons">
+            <a href="#collection" class="btn btn-primary">コレクションを見る</a>
+            <a href="#contact" class="btn btn-secondary">相談する</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-frame">
+            <div class="floral-art">
+              <div class="bloom b1"></div>
+              <div class="bloom b2"></div>
+              <div class="bloom b3"></div>
+              <div class="bloom b4"></div>
+              <div class="bloom b5"></div>
+              <div class="bloom b6"></div>
+
+              <div class="leaf l1"></div>
+              <div class="leaf l2"></div>
+              <div class="leaf l3"></div>
+              <div class="leaf l4"></div>
+              <div class="leaf l5"></div>
+            </div>
+
+            <div class="signature">
+              <div>
+                <strong>Seasonal Signature Bouquet</strong>
+                <span>洗練された色彩と深みのある質感で仕立てる、特別な日の花束</span>
+              </div>
+              <div class="signature-mark">✦</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="collection" class="section">
+      <div class="container">
+        <span class="eyebrow">Collection</span>
+        <h2 class="section-title">洗練されたフローラルコレクション</h2>
+        <p class="section-lead">
+          贈答用、記念日、レセプション、自宅空間の演出まで。
+          上質を求める方のためのフラワーデザインをご用意しています。
+        </p>
+
+        <div class="products">
+          <article class="product-card">
+            <div class="product-image"></div>
+            <div class="product-body">
+              <h3>Signature Bouquet</h3>
+              <p>
+                深みのあるカラーと気品ある花材を束ねた、ブランドを象徴する上質な花束。
+              </p>
+              <div class="price">¥12,000〜</div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image"></div>
+            <div class="product-body">
+              <h3>Luxury Arrangement</h3>
+              <p>
+                ホテルライクな華やかさを備えたアレンジメント。祝い花や特別な贈り物に最適です。
+              </p>
+              <div class="price">¥18,000〜</div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image"></div>
+            <div class="product-body">
+              <h3>Premium Interior Flowers</h3>
+              <p>
+                自宅やサロンの空間に品格を添える、インテリア向けの定期装花プランです。
+              </p>
+              <div class="price">¥22,000〜</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="philosophy" class="section">
+      <div class="container">
+        <span class="eyebrow">Philosophy</span>
+        <h2 class="section-title">美しさの余韻までデザインする</h2>
+        <p class="section-lead">
+          花そのものの美しさに加え、贈る瞬間、受け取る感情、飾られた後の空間までも含めて、
+          ひとつの体験として丁寧に設計しています。
+        </p>
+
+        <div class="about-panel">
+          <div class="about-grid">
+            <div class="about-item">
+              <h3>厳選された花材</h3>
+              <p>
+                色の深み、花弁の質感、茎の美しさまで見極め、上質な印象を持つ花材のみを使用します。
+              </p>
+            </div>
+            <div class="about-item">
+              <h3>静かな華やかさ</h3>
+              <p>
+                過度に装飾せず、洗練された色彩と余白で、長く記憶に残る品格ある表現を目指します。
+              </p>
+            </div>
+            <div class="about-item">
+              <h3>特別なシーンへの提案</h3>
+              <p>
+                記念日、開業祝、ブランドイベント、ラグジュアリーギフトなど幅広いご相談に対応します。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="boutique" class="section">
+      <div class="container">
+        <span class="eyebrow">Boutique</span>
+        <h2 class="section-title">店舗情報・ご相談</h2>
+        <p class="section-lead">
+          オーダーメイドのご相談、法人案件、装花のご依頼なども承っております。
+        </p>
+
+        <div class="info-grid">
+          <div class="panel">
+            <h3>店舗情報</h3>
+            <div class="info-list">
+              <div class="info-row">
+                <strong>店名</strong>
+                <span>Maison Fleur</span>
+              </div>
+              <div class="info-row">
+                <strong>住所</strong>
+                <span>東京都港区南青山 1-2-3 Maison Fleur 表参道</span>
+              </div>
+              <div class="info-row">
+                <strong>電話</strong>
+                <span>03-1234-5678</span>
+              </div>
+              <div class="info-row">
+                <strong>営業時間</strong>
+                <span>11:00〜19:00</span>
+              </div>
+              <div class="info-row">
+                <strong>定休日</strong>
+                <span>水曜日</span>
+              </div>
+              <div class="info-row">
+                <strong>対応内容</strong>
+                <span>花束、アレンジメント、定期装花、法人装花、予約注文</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="contact" class="panel">
+            <h3>お問い合わせ</h3>
+            <form>
+              <div>
+                <label for="name">お名前</label>
+                <input id="name" type="text" placeholder="山田 花子" />
+              </div>
+              <div>
+                <label for="email">メールアドレス</label>
+                <input id="email" type="email" placeholder="example@mail.com" />
+              </div>
+              <div>
+                <label for="message">ご相談内容</label>
+                <textarea id="message" placeholder="ご用途、ご予算、ご希望の色味、納品日などをご記入ください。"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">送信する</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Maison Fleur. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("お問い合わせありがとうございます。内容を確認のうえ、折り返しご連絡いたします。");
+    });
+  </script>
+</body>
+</html>

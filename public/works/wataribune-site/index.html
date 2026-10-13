@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海風丸 | 渡船・釣り船・沖磯渡し</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === CSSリセット & ベース === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* === カラーパレット === */
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #00a8ff;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        /* === ヘッダー === */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary-color); }
+        .logo i { margin-right: 8px; color: var(--secondary-color); }
+
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-weight: bold; color: var(--text-color); transition: color 0.3s; }
+        .nav-links a:hover { color: var(--secondary-color); }
+
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; color: var(--primary-color); }
+
+        /* === ヒーローセクション === */
+        .hero {
+            height: 80vh;
+            min-height: 500px;
+            /* 海の画像のプレースホルダー */
+            background: linear-gradient(rgba(0, 43, 91, 0.5), rgba(0, 43, 91, 0.7)), url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .btn-primary:hover { background-color: #c0392b; transform: translateY(-2px); color: var(--white); }
+
+        /* === 共通セクション === */
+        .section { padding: 80px 20px; }
+        .section-light { background-color: var(--white); }
+        .section-dark { background-color: var(--bg-light); }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 15px auto 0;
+        }
+
+        /* === 最新情報（出船状況・釣果） === */
+        .info-box { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .info-item {
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        .info-item:last-child { border-bottom: none; }
+        .date { font-weight: bold; color: var(--primary-color); width: 120px; }
+        .badge { background: var(--accent-color); color: var(--white); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+        .badge.normal { background: var(--secondary-color); }
+        .badge.info { background: #27ae60; }
+
+        /* === 料金・出船時間 === */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .table-wrap { overflow-x: auto; }
+        .price-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .price-table th, .price-table td { border: 1px solid #ddd; padding: 15px; text-align: center; }
+        .price-table th { background-color: var(--primary-color); color: var(--white); }
+        .price-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .time-box { background: var(--white); padding: 20px; border-radius: 8px; border-left: 5px solid var(--secondary-color); margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
+        /* === お問い合わせ・予約 === */
+        .contact-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .contact-box p { font-size: 1.1rem; margin-bottom: 20px; }
+        .phone-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            display: block;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .phone-number:hover { opacity: 0.9; }
+
+        /* === アクセス === */
+        .map-container { width: 100%; height: 400px; background-color: #ddd; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 20px; }
+
+        /* === フッター === */
+        footer { background-color: #1a1a1a; color: #ccc; text-align: center; padding: 30px 20px; }
+        footer p { margin-top: 10px; font-size: 0.9rem; }
+
+        /* === レスポンシブ対応 === */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                text-align: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .grid-2 { grid-template-columns: 1fr; gap: 20px; }
+            .phone-number { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo"><i class="fa-solid fa-ship"></i> 海風丸</a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#news">最新情報</a></li>
+                    <li><a href="#system">料金・時間</a></li>
+                    <li><a href="#access">アクセス</a></li>
+                    <li><a href="#contact">ご予約</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <h1>大海原へ、最高の釣果を求めて</h1>
+        <p>安全第一。初心者からベテランまで、快適な釣りをサポートします。</p>
+        <a href="#contact" class="btn-primary"><i class="fa-solid fa-phone"></i> 今すぐ予約する</a>
+    </section>
+
+    <!-- 最新情報・釣果 -->
+    <section id="news" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">本日の出船状況・釣果</h2>
+            <div class="info-box">
+                <div class="info-item">
+                    <span class="date">2026.04.23</span>
+                    <span class="badge">出船状況</span>
+                    <p>明日は波も穏やかな予報のため、通常通り出船いたします。</p>
+                </div>
+                <div class="info-item">
+                    <span class="date">2026.04.22</span>
+                    <span class="badge info">釣果情報</span>
+                    <p>沖磯にて、50cmオーバーのクロダイ、マダイ多数あがりました！</p>
+                </div>
+                <div class="info-item">
+                    <span class="date">2026.04.15</span>
+                    <span class="badge normal">お知らせ</span>
+                    <p>ゴールデンウィークの予約受付を開始しました。お早めにご連絡ください。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金・出船時間 -->
+    <section id="system" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">料金・出船時間</h2>
+            <div class="grid-2">
+
+                <!-- 料金表 -->
+                <div>
+                    <h3><i class="fa-solid fa-coins" style="color:var(--secondary-color);"></i> 渡船料金（お一人様）</h3>
+                    <p style="margin-bottom:15px; font-size:0.9rem;">※エサ代・仕掛け代は含まれておりません。</p>
+                    <div class="table-wrap">
+                        <table class="price-table">
+                            <tr>
+                                <th>コース</th>
+                                <th>大人</th>
+                                <th>女性・中学生以下</th>
+                            </tr>
+                            <tr>
+                                <td>沖磯渡し（半日）</td>
+                                <td>4,000円</td>
+                                <td>3,000円</td>
+                            </tr>
+                            <tr>
+                                <td>沖磯渡し（1日）</td>
+                                <td>5,000円</td>
+                                <td>4,000円</td>
+                            </tr>
+                            <tr>
+                                <td>乗り合い船（午前便）</td>
+                                <td>8,000円</td>
+                                <td>6,000円</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 出船時間 -->
+                <div>
+                    <h3><i class="fa-regular fa-clock" style="color:var(--secondary-color);"></i> 営業時間・出船時間</h3>
+                    <p style="margin-bottom:15px; font-size:0.9rem;">※季節や天候により変動する場合があります。</p>
+
+                    <div class="time-box">
+                        <strong>【夏季】 4月〜10月</strong><br>
+                        出港： AM 5:00 / 帰港： PM 14:00
+                    </div>
+                    <div class="time-box">
+                        <strong>【冬季】 11月〜3月</strong><br>
+                        出港： AM 6:30 / 帰港： PM 15:00
+                    </div>
+                    <ul style="list-style:disc; margin-left:20px; font-size:0.9rem; color:#666;">
+                        <li>出港の30分前には港にお集まりください。</li>
+                        <li>定休日：毎週火曜日（祝日の場合は営業、翌日休み）</li>
+                        <li>悪天候の場合は前日の19時までにご連絡いたします。</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- アクセス -->
+    <section id="access" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">アクセス・集合場所</h2>
+            <div class="map-container">
+                <!-- ここにGoogleマップのiframeを埋め込みます -->
+                <p><i class="fa-solid fa-map-location-dot fa-3x"></i><br>※ここにGoogleマップが入ります</p>
+            </div>
+            <div style="background:var(--white); padding:20px; border-radius:8px;">
+                <p><strong>乗船場住所：</strong> 〒000-0000 〇〇県〇〇市〇〇町1-2-3 （〇〇漁港内）</p>
+                <p><strong>駐車場：</strong> 無料駐車場 約20台完備。港の入り口右手のスペースをご利用ください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせ・予約 -->
+    <section id="contact" class="section section-light">
+        <div class="container">
+            <div class="contact-box">
+                <h2 style="font-size:2rem; margin-bottom:10px;">ご予約・お問い合わせ</h2>
+                <p>ご予約は、前日の20:00までにお電話にてお願いいたします。<br>天候による出船確認などもお気軽にお問い合わせください。</p>
+
+                <a href="tel:0000000000" class="phone-number">
+                    <i class="fa-solid fa-phone-volume"></i> 000-000-0000
+                </a>
+
+                <p style="font-size:0.9rem;">受付時間： 8:00 ～ 20:00 （定休日：火曜日）</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <h3 style="margin-bottom:10px;"><i class="fa-solid fa-ship"></i> 渡船・釣り船 海風丸</h3>
+            <p>安全で楽しい釣りの思い出作りをお手伝いします。</p>
+            <p style="margin-top:20px;">&copy; 2026 海風丸 All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- スクリプト (モバイルメニュー用) -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // リンククリック時にメニューを閉じる
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

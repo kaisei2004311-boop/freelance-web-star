@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://kaisei2004311-boop.github.io/freelance-web-star/works/proposal-service/sitemap.xml

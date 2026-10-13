@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通所サービス おおきに | 笑顔あふれるデイサービス</title>
+    <style>
+        /* 基本設定 */
+        :root {
+            --primary-color: #ef810f; /* 温かみのあるオレンジ */
+            --secondary-color: #8bc34a; /* 安心感のあるグリーン */
+            --bg-color: #fffaf0;
+            --text-color: #333333;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            background: linear-gradient(rgba(255, 250, 240, 0.7), rgba(255, 250, 240, 0.7)), url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80') center/cover;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 60px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 施設紹介 */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* サービス内容 */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .service-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid var(--primary-color);
+        }
+        .service-card h3 {
+            color: var(--primary-color);
+        }
+
+        /* 1日の流れ */
+        .timeline {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .time-row {
+            display: flex;
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 0;
+        }
+        .time-row:last-child {
+            border-bottom: none;
+        }
+        .time {
+            font-weight: bold;
+            color: var(--secondary-color);
+            width: 80px;
+            flex-shrink: 0;
+        }
+        .event {
+            padding-left: 20px;
+        }
+
+        /* お問い合わせ・アクセス */
+        .info-box {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .tel {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        /* フッター */
+        footer {
+            background-color: var(--text-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* スマホでは簡易的に非表示（必要に応じてハンバーガーメニューを実装） */
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">通所サービス おおきに</div>
+            <nav class="nav-links">
+                <a href="#about">施設紹介</a>
+                <a href="#service">サービス</a>
+                <a href="#schedule">1日の流れ</a>
+                <a href="#contact">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <div class="hero">
+        <h1>「おおきに」の心で、<br>毎日を笑顔に。</h1>
+        <p>住み慣れた地域で、ご自宅のようにくつろげるデイサービスです。<br>お一人おひとりに寄り添った温かいケアを提供します。</p>
+    </div>
+
+    <!-- 施設紹介 -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">おおきに について</h2>
+            <div class="about-content">
+                <p>「おおきに」とは、感謝の気持ちを表す温かい言葉です。</p>
+                <p>私たちは、ご利用者様との出会いに感謝し、ご家族様とのご縁に感謝し、地域の皆様に感謝する気持ちを大切にしています。ご高齢者が住み慣れた街で、いつまでも自分らしく、笑顔で生き生きと過ごせるよう、スタッフ一同まごころを込めてお手伝いさせていただきます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス内容 -->
+    <section id="service" style="background-color: #f9f4ed;">
+        <div class="container">
+            <h2 class="section-title">サービス内容</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>健康チェック</h3>
+                    <p>到着後、血圧や体温などのバイタルチェックを行い、その日の体調を看護スタッフがしっかり確認します。</p>
+                </div>
+                <div class="service-card">
+                    <h3>お食事・おやつ</h3>
+                    <p>栄養バランスを考えた、季節感あふれる温かい手作りのお食事をご用意いたします。きざみ食などにも対応可能です。</p>
+                </div>
+                <div class="service-card">
+                    <h3>安心の入浴</h3>
+                    <p>広々としたお風呂で、手すりやリフトを完備。スタッフがマンツーマンで付き添い、安全で快適な入浴をサポートします。</p>
+                </div>
+                <div class="service-card">
+                    <h3>機能訓練・レク</h3>
+                    <p>無理なく楽しく体を動かせる体操や、脳トレ、季節の行事などを通じて、心身の機能維持・向上を図ります。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1日の流れ -->
+    <section id="schedule">
+        <div class="container">
+            <h2 class="section-title">1日の流れ</h2>
+            <div class="timeline">
+                <div class="time-row">
+                    <div class="time">08:30</div>
+                    <div class="event"><strong>お迎え</strong><br>ご自宅まで専用車でお迎えに上がります。車いす対応車もございます。</div>
+                </div>
+                <div class="time-row">
+                    <div class="time">09:30</div>
+                    <div class="event"><strong>到着・健康チェック</strong><br>お茶を飲んで一息ついた後、血圧・体温などを測定します。</div>
+                </div>
+                <div class="time-row">
+                    <div class="time">10:00</div>
+                    <div class="event"><strong>入浴・個別活動</strong><br>順番にご入浴。待っている間は趣味の活動や脳トレなどを楽しみます。</div>
+                </div>
+                <div class="time-row">
+                    <div class="time">12:00</div>
+                    <div class="event"><strong>昼食・口腔ケア</strong><br>皆さまで美味しい昼食をいただきます。食後は歯磨きなどの口腔ケアを行います。</div>
+                </div>
+                <div class="time-row">
+                    <div class="time">13:30</div>
+                    <div class="event"><strong>レクリエーション・体操</strong><br>集団体操や、ゲーム、手芸などのレクリエーションで楽しい時間を過ごします。</div>
+                </div>
+                <div class="time-row">
+                    <div class="time">15:00</div>
+                    <div class="event"><strong>おやつ・談笑</strong><br>手作りおやつと温かいお茶でリラックスタイムです。</div>
+                </div>
+                <div class="time-row">
+                    <div class="time">16:30</div>
+                    <div class="event"><strong>お送り</strong><br>今日も一日「おおきに」。ご自宅まで安全にお送りいたします。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせ・アクセス -->
+    <section id="contact" style="background-color: #f9f4ed;">
+        <div class="container">
+            <h2 class="section-title">アクセス・お問い合わせ</h2>
+            <div class="info-box">
+                <p>見学・無料体験は随時受け付けております。<br>お気軽にお電話にてご相談ください。</p>
+                <div class="tel">☎ 012-345-6789</div>
+                <p>受付時間：月曜日〜土曜日 8:30〜17:30（日・年末年始休業）</p>
+                <hr style="margin: 30px 0; border: none; border-top: 1px dashed #ccc;">
+                <h3>事業所概要</h3>
+                <p><strong>事業所名：</strong> 通所サービス おおきに</p>
+                <p><strong>所在地：</strong> 〒000-0000 〇〇県〇〇市〇〇町1-2-3</p>
+                <!-- 必要であればここにGoogleマップの埋め込みコードを追加します -->
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <p>&copy; 2026 通所サービス おおきに All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
